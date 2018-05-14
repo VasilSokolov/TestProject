@@ -32,5 +32,4 @@ public class Lake<Integer> implements Iterable<Integer> {
 			return steps.get(this.index++);
 		}
 	}
-
 }
