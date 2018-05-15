@@ -27,17 +27,17 @@ public class VisibiliteOFClass {
 		IRunnable animal = new Animal();
 		animal.run();
 		
-//		IRunnable dog = new Dog();
-//		dog.run();
-//		
-//		AbstractParent abstractperant = new ChildClass("Pesho be", 12);
-////		abper.abstractName = "cew";
-//		System.out.println(abstractperant.getAbstractName());
-//		abstractperant.goUpHill();
-//		
-//		AbstractSubClass abstractSubClass = new ChildClass("Pepi", 13);
-//		abstractSubClass.foo();
-//		abstractSubClass.goUpHill();
+		IRunnable dog = new Dog();
+		dog.run();
+		
+		AbstractParent abstractperant = new ChildClass("Pesho be", 12);
+//		abper.abstractName = "cew";
+		System.out.println(abstractperant.getAbstractName());
+		abstractperant.goUpHill();
+		
+		AbstractSubClass abstractSubClass = new ChildClass("Pepi", 13);
+		abstractSubClass.foo();
+		abstractSubClass.goUpHill();
 		
 	}
 }

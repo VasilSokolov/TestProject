@@ -3,6 +3,8 @@ package com.designpatterns.creational.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.designpatterns.creational.builder.interfaces.Item;
+
 public class Meal {
 	
 	private List<Item> items = new ArrayList<Item>();

@@ -1,5 +1,10 @@
 package com.designpatterns.creational.builder;
 
+import com.designpatterns.creational.builder.impl.ChickenBurger;
+import com.designpatterns.creational.builder.impl.Coke;
+import com.designpatterns.creational.builder.impl.Pepsi;
+import com.designpatterns.creational.builder.impl.VegBurger;
+
 public class MealBuilder {
 	
 	public Meal prepareVegMeal() {
