@@ -11,5 +11,4 @@ public class NullCustomer extends AbstractCustomer {
 	public String getName() {
 		return this.name;
 	}
-
 }
