@@ -1,13 +1,15 @@
 package org.javatest;
 
 public class Network {
+
+	int id;
+	Network p;
+	
 	Network(int x, Network n){
 		id = x;
 		p = this;
 		if(n != null) p=n;
 	}
-	int id;
-	Network p;
 	public static void main(String[] args) {
 		Network n1 = new Network(1, null);
 		n1.go(n1);

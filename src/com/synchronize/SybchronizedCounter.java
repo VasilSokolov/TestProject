@@ -8,8 +8,4 @@ public class SybchronizedCounter {
 		syncCounter.value();
 		syncCounter.decrement();
 	}
-	
-	
-	
-
 }

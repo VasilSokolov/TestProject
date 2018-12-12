@@ -1,0 +1,8 @@
+/**
+ * 
+ */
+/**
+ * @author vsok
+ *
+ */
+package conditions;
