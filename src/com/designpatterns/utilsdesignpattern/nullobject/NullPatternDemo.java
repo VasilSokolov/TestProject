@@ -1,7 +1,4 @@
-package com.designpatterns.utilsdesignpattern;
-
-import com.designpatterns.utilsdesignpattern.nullobject.AbstractCustomer;
-import com.designpatterns.utilsdesignpattern.nullobject.CustomerFactory;
+package com.designpatterns.utilsdesignpattern.nullobject;
 
 public class NullPatternDemo {
 	   public static void main(String[] args) {
