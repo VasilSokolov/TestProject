@@ -23,6 +23,5 @@ public class Cache {
 	
 	public void addService(Service newService) {		
 		services.add(newService);
-	}
-	
+	}	
 }
