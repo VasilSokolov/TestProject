@@ -7,7 +7,7 @@ public class InitialContext {
 		
 	public Object lookup(String ngName) {		
 		System.out.println("Looking up and creating a new " + ngName + " object");	
-		System.out.println(ServiceOne.class.getName());
+//		System.out.println(ServiceOne.class.getName());
 		try {
 			Class<?> current = Class.forName(PACKAGE_PATH + ngName);			
 			try {
