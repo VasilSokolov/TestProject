@@ -12,10 +12,10 @@ public class StudentDaoImp implements StudentDao {
 	public StudentDaoImp() {
 		this.students = new ArrayList<Student>(
 				Arrays.asList(
-						new Student("Moni", 0),
-						new Student("pesho", 1),
-						new Student("sashko", 2),
-						new Student("sashko", 44)
+						new Student("Moni0", 0),
+						new Student("pesho1", 1),
+						new Student("sashko2", 2),
+						new Student("sashko44", 44)
 						)
 				);;
 	}

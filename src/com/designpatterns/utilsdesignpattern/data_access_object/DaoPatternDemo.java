@@ -1,22 +1,58 @@
 package com.designpatterns.utilsdesignpattern.data_access_object;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 //import java.util.logging.*;
 
 public class DaoPatternDemo {
 //	private static Logger logger = Logger.getLogger(DaoPatternDemo.class.getName());
 	
-	private static final int ID = 3;
+	private static final int ID = 4;
 	private static StudentDao students = new StudentDaoImp();
 	private static Student student;
 	
 	public static void main(String[] args) {
 		
 //		studentCrudOperations();
-		streamsManipulations();
+//		streamsManipulations();
+		parallelStream();
 	}
 	
 	public static void streamsManipulations() {
-		
+		String name = students.getAllStudents().stream()
+				.filter(s-> ID == s.getRollNo())
+				.map(s-> s.getName())
+				.findFirst()
+				.orElse(null);
+				
+		System.out.println(name);
+	}
+	
+	public static void parallelStream() {
+		List<Integer> ss = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+		List<Integer> result = new ArrayList<Integer>();
+		 
+		Stream<Integer> stream = ss.parallelStream();
+		 
+		stream.map(s -> {
+		        synchronized (result) {
+		          if (result.size() < 10) {
+		            result.add(s);
+		          }
+		        }
+				return s;
+		    }).forEach(e -> {});
+		 System.out.println(result);
+	
+		 Stream<String> names4 = Stream.of("Pesho","Anita","Dido", "Lisana", "Doncho");
+		 Optional<String> firstNameWithD = names4.filter(i -> i.startsWith("D")).findFirst();
+		 if(firstNameWithD.isPresent()){
+		 	System.out.println("First Name starting with D="+firstNameWithD.get()); //Dido
+		 }
 	}
 	
 	public static void studentCrudOperations() {
