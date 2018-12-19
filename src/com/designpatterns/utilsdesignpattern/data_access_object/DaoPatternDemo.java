@@ -10,12 +10,22 @@ public class DaoPatternDemo {
 	private static Student student;
 	
 	public static void main(String[] args) {
+		
+//		studentCrudOperations();
+		streamsManipulations();
+	}
+	
+	public static void streamsManipulations() {
+		
+	}
+	
+	public static void studentCrudOperations() {
 		printAllStudents();
 		if (getStudent(ID)) {
 			printUpdateStudent();
 			printDeleteStudent();
 			printGetStudent();
-		} 
+		}
 		System.out.println("Student is not in Database with id " + ID);
 	}
 	
