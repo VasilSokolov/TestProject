@@ -11,7 +11,12 @@ public class StudentDaoImp implements StudentDao {
 	
 	public StudentDaoImp() {
 		this.students = new ArrayList<Student>(
-				Arrays.asList(new Student("Moni", 0) , new Student("pesho", 1), new Student("sashko", 22))
+				Arrays.asList(
+						new Student("Moni", 0),
+						new Student("pesho", 1),
+						new Student("sashko", 2),
+						new Student("sashko", 44)
+						)
 				);;
 	}
 
@@ -22,14 +27,21 @@ public class StudentDaoImp implements StudentDao {
 	}
 
 	@Override
-	public Student getStudent(int rollNo) {		
+	public Student getStudent(int rollNo) {
+		
 		return students.get(rollNo);
 	}
 
 	@Override
 	public void updateStudent(Student student) {
 //		students.get(student.getRollNo()).setName(student.getName());
-		Student s = students.get(student.getRollNo());
+		Student s = null;
+		try {
+			s = students.get(student.getRollNo());
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Error id " + student.getRollNo());
+			return;
+		}
 		s.setName(student.getName());
 	}
 

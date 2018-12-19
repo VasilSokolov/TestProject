@@ -5,7 +5,7 @@ package com.designpatterns.utilsdesignpattern.data_access_object;
 public class DaoPatternDemo {
 //	private static Logger logger = Logger.getLogger(DaoPatternDemo.class.getName());
 	
-	private static final int ID = 5;
+	private static final int ID = 3;
 	private static StudentDao students = new StudentDaoImp();
 	private static Student student;
 	
@@ -15,13 +15,17 @@ public class DaoPatternDemo {
 			printUpdateStudent();
 			printDeleteStudent();
 			printGetStudent();
-		}
+		} 
+		System.out.println("Student is not in Database with id " + ID);
 	}
 	
 	public static boolean getStudent(int id) {
 		try {
-			student = students.getAllStudents().get(id);
-			return true;
+			student = students.getAllStudents().stream()
+					.filter(s-> id == s.getRollNo())
+					.findAny()
+					.orElse(null);
+			return student != null ? true : false;
 	    } catch (IndexOutOfBoundsException error) {
 	        // Output expected IndexOutOfBoundsExceptions.
 			System.out.println("Student is not in Database with id " + id);
@@ -59,7 +63,11 @@ public class DaoPatternDemo {
 	public static void printGetStudent() {
 		Student findStudent = new Student();
 		if (student != null) {
-			findStudent = students.getStudent(student.getRollNo());
+			try {
+				findStudent = students.getStudent(student.getRollNo());
+			} catch (Exception e) {
+				return;
+			}
 		}		
 
 		System.out.println(findStudent);
