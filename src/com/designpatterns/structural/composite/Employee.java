@@ -16,6 +16,10 @@ public class Employee {
 		this.subordinates = new ArrayList<Employee>();
 	}
 
+	public Employee(String name) {
+		this.name = name;
+	}
+
 	public void add(Employee e) {
 		subordinates.add(e);
 	}

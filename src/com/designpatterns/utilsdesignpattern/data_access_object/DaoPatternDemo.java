@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.designpatterns.structural.composite.Employee;
 
 //import java.util.logging.*;
 
@@ -19,17 +22,48 @@ public class DaoPatternDemo {
 		
 //		studentCrudOperations();
 //		streamsManipulations();
-		parallelStream();
+		streamsManipulations();
 	}
 	
 	public static void streamsManipulations() {
+//		List<String> listOfNames = new ArrayList<>();
 		String name = students.getAllStudents().stream()
-				.filter(s-> ID == s.getRollNo())
-				.map(s-> s.getName())
+				.filter(s -> ID == s.getRollNo())
+				.map(s -> s.getName())
 				.findFirst()
 				.orElse(null);
-				
 		System.out.println(name);
+		
+		List<Employee> employees = students.getAllStudents().stream()
+				.map(e-> new Employee(e.getName()))
+				.collect(Collectors.toList());
+				System.out.println(employees);
+				
+//		List<String> listOfNames = students.getAllStudents().stream()
+//				.map(n -> n.getName())
+//				.collect(Collectors.toList());
+//		System.out.println(listOfNames.toString());
+		List<String> myList =
+			    Arrays.asList("a1", "a2", "b1", "c2", "c1");
+
+		myList
+		    .stream()
+		    .filter(s -> s.startsWith("c") || s.startsWith("a"))
+		    .map(String::toUpperCase)
+		    .sorted()
+		    .forEach(p-> System.out.println(p));
+		
+		 Stream<String> names4 = Stream.of("Pesho","Anita","Dido", "Lisana", "Doncho");
+		 Optional<String> firstNameWithD = names4.filter(i -> i.startsWith("z")).findFirst();
+		 
+		 if(firstNameWithD.isPresent()){
+		 	System.out.println("First Name starting with D="+firstNameWithD.get()); //Dido
+		 }
+		 System.out.println();
+		 Arrays.asList("a1a2a3"+"a4"+"a5")
+		    .stream()
+		    .findAny()
+		    .ifPresent(p-> {System.out.println(p);});
 	}
 	
 	public static void parallelStream() {
@@ -47,12 +81,6 @@ public class DaoPatternDemo {
 				return s;
 		    }).forEach(e -> {});
 		 System.out.println(result);
-	
-		 Stream<String> names4 = Stream.of("Pesho","Anita","Dido", "Lisana", "Doncho");
-		 Optional<String> firstNameWithD = names4.filter(i -> i.startsWith("D")).findFirst();
-		 if(firstNameWithD.isPresent()){
-		 	System.out.println("First Name starting with D="+firstNameWithD.get()); //Dido
-		 }
 	}
 	
 	public static void studentCrudOperations() {
@@ -62,7 +90,7 @@ public class DaoPatternDemo {
 			printDeleteStudent();
 			printGetStudent();
 		}
-		System.out.println("Student is not in Database with id " + ID);
+		System.out.println("Student is not in Database with id=" + ID);
 	}
 	
 	public static boolean getStudent(int id) {
