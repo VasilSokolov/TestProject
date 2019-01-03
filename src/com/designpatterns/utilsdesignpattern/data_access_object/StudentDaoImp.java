@@ -17,7 +17,7 @@ public class StudentDaoImp implements StudentDao {
 						new Student("sashko2", 2),
 						new Student("sashko44", 44)
 						)
-				);;
+				);
 	}
 
 	//retrive list with user from database

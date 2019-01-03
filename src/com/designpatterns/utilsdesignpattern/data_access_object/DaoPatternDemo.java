@@ -2,13 +2,17 @@ package com.designpatterns.utilsdesignpattern.data_access_object;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.designpatterns.structural.composite.Employee;
-
 //import java.util.logging.*;
 
 public class DaoPatternDemo {
@@ -19,17 +23,98 @@ public class DaoPatternDemo {
 	private static Student student;
 	
 	public static void main(String[] args) {
-		
+		int[] input = {7,4,0,3,5,6};
+		System.out.println(min(input));
 //		studentCrudOperations();
 //		streamsManipulations();
-		streamsManipulations();
+//		streamsManipulations();
+		
+//		streamsTest();
+		
+		PojoEmployee pojoEmpl = new PojoEmployee();
+		List<PojoEmployee> list = new ArrayList<>();
+		list.add(new PojoEmployee());
+		list.add(new PojoEmployee());
+		list.add(new PojoEmployee());
+		list.get(1);
+		Optional<PojoEmployee> opt1 = Optional.ofNullable(pojoEmpl);
+		Optional<PojoEmployee> opt = Optional.ofNullable(null);
+		System.out.println(opt1.get().getName());
 	}
 	
+	public static int min(int[] arr) {
+		int min = arr[0];
+		int min2 = arr[1];
+		
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] < min) {
+				min2 = min;
+				min = arr[i];
+			} else if(arr[i] < min2) {
+				min2 = arr[i];
+			}
+		}
+		
+		return min2;
+	}
+	
+	public static void streamsTest() {
+		
+//		List<String> streams = new ArrayList<>();
+//		String s = "AMAN,AMITABH,LOKESH,RAHUL,SALMAN,SHAHRUKH,SHEKHAR,YANA";
+//        String[] arr = s.split(",");
+//		for(int i = 0; i < arr.length; i++){
+//            streams.add(arr[i]);
+//        }
+//		System.out.println(arr.length);
+//        streams.stream().sorted()
+//        .map(String::toLowerCase)
+//        .forEach(System.out::println);
+        
+        HashSet<Integer> set = new HashSet<>();
+        set.add(2);
+        set.add(1);
+        set.add(6);
+        set.add(4);
+        set.add(3);
+        Object[] arr = set.toArray();
+        
+        Arrays.sort(arr);
+        for(int i = 0 ; i < arr.length ; i++) {
+        	System.out.println(arr[i]);
+        }
+
+    	System.out.println(arr instanceof  Object);
+
+        Stream<Integer> stream = set.stream();
+//        stream.forEach(p -> System.out.println(p));
+        Integer[] evenNumbersArr = stream.toArray(Integer[]::new);
+//        System.out.println(evenNumbersArr);
+
+		for (Integer integer : evenNumbersArr) {
+			System.out.println(integer);
+		}
+//		 IntStream intStream = "12345_abcdefg".chars();
+//		 intStream.forEach(p -> System.out.println(p));
+//        //OR 
+//         System.out.println();
+//		 
+//        Stream<String> stream = Stream.of("A$B$C".split("\\$"));
+//        stream.forEach(p -> System.out.println(p));
+
+//		Stream<Integer> stream = Stream.of(1,2,3,4,5,6,7,8,9);
+//        stream.forEach(p -> System.out.println(p));
+//        System.out.println();
+        
+//        Stream<Date> streamDate = Stream.generate(() -> { return new Date(); });
+//        streamDate.forEach(p -> System.out.println(p));
+	}
+
 	public static void streamsManipulations() {
 //		List<String> listOfNames = new ArrayList<>();
 		String name = students.getAllStudents().stream()
 				.filter(s -> ID == s.getRollNo())
-				.map(s -> s.getName())
+				.map(s ->s.getName())
 				.findFirst()
 				.orElse(null);
 		System.out.println(name);
@@ -47,7 +132,7 @@ public class DaoPatternDemo {
 			    Arrays.asList("a1", "a2", "b1", "c2", "c1");
 
 		myList
-		    .stream()
+			.stream()
 		    .filter(s -> s.startsWith("c") || s.startsWith("a"))
 		    .map(String::toUpperCase)
 		    .sorted()
@@ -64,6 +149,21 @@ public class DaoPatternDemo {
 		    .stream()
 		    .findAny()
 		    .ifPresent(p-> {System.out.println(p);});
+		 
+		 System.out.println();
+	}
+	
+	public static <T> Predicate<T> distinctByKeys(Function<? super T, Object> keyExtractor) {
+		Map<Object, Boolean> seen =  new ConcurrentHashMap<Object, Boolean>();
+		
+		return t ->seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+	}
+	
+	public static List<Employee> getlist() {
+		return Arrays.asList(
+				new Employee("Roni", "LM", 2000),
+				new Employee("Pedro", "SNN", 1500)
+				);
 	}
 	
 	public static void parallelStream() {
@@ -146,4 +246,37 @@ public class DaoPatternDemo {
 
 		System.out.println(findStudent);
 	}
+	
+	
+	
+	 private static class NameAndPricePojoKey {
+		    final String name;
+		    final int price;
+
+		    public NameAndPricePojoKey(final PojoEmployee pojoEmployee) {
+		      this.name = pojoEmployee.getName();
+		      this.price = pojoEmployee.getPrice();
+		    }
+
+		    @Override
+		    public boolean equals(final Object o) {
+		      if (this == o) return true;
+		      if (o == null || getClass() != o.getClass()) return false;
+
+		      final NameAndPricePojoKey that = (NameAndPricePojoKey) o;
+
+		      if (price != that.price) return false;
+		      return name != null ? name.equals(that.name) : that.name == null;
+
+		    }
+
+		    @Override
+		    public int hashCode() {
+		      int result = name != null ? name.hashCode() : 0;
+		      result = 31 * result + price;
+		      return result;
+		    }
+		  }
 }
+
+
