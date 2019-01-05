@@ -18,7 +18,7 @@ public class BubbleSort {
 	      System.out.print(" " + intArray[i]);
 	    }
 	  }
-	  public static void main(String args[]) {
+	  public static void main(String[] args) {
 	    System.out.print("Array Before Sorting->");
 	    printArray();
 	    doSort();

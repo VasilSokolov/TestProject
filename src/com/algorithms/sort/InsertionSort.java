@@ -1,7 +1,9 @@
 package com.algorithms.sort;
 
 public class InsertionSort {
+	
 	 static int intArray[] = { 1000, 1, 100, 101, 15 };
+	 
 	 public static void doSort() {
 	  for (int outer = 1; outer < intArray.length; outer++) {
 	   for(int inner=outer;inner > 0; inner--){
@@ -14,6 +16,7 @@ public class InsertionSort {
 	   }//inner loop ends
 	  }//outer loop ends
 	 }
+	 
 	 public static void printArray() {
 	  for (int i = 0; i < intArray.length; i++) {
 	   System.out.print(" " + intArray[i]);

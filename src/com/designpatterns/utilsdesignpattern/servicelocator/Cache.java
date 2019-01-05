@@ -21,7 +21,7 @@ public class Cache {
 		return null;
 	}
 	
-	public void addService(Service newService) {		
+	public void addService(Service newService) {
 		services.add(newService);
-	}	
+	}
 }
