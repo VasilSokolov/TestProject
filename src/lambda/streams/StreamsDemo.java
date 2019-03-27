@@ -4,11 +4,15 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lambda.model.LoanApplication;
+import lambda.model.LoanApplicationService;
 import lambda.model.Product;
 import lambda.model.Users;
 
@@ -18,8 +22,11 @@ public class StreamsDemo {
 	public static void main(String[] args) {
 		StreamsDemo demo = new StreamsDemo();
 		
-		demo.items();
-		
+//		demo.items();
+//		List<Users> addData = demo.addData();
+//		System.out.println(addData.toString());
+		boolean isPassed = demo.passedCheck();
+		System.out.println("Sign: " + isPassed);
 	}
 
 	private List<String> items() {
@@ -72,19 +79,15 @@ public class StreamsDemo {
 			}
 		});
 		
-		
-		
 		return items;
 	}
 
 	
 	private void lambda() {
-
 		
 		NumericTest isEven = (int n) -> (n % 2) == 0;
 		NumericTest isNegative = (int n) -> n < 0;
 		
-
 		StringsTest morningGreeting  = (String str) -> "Good Morning " + str + "!";
 		
 		// Output: false
@@ -92,8 +95,6 @@ public class StreamsDemo {
 
 		// Output: true
 		System.out.println(isNegative.computeTest(-5));
-		
-		
 	}
 	
 	private List<Users> getData() {
@@ -128,33 +129,60 @@ public class StreamsDemo {
         return userses;
     }
 	
-	 private List<Users> addData(List<Users> users) {
+	 private List<Users> addData() {
     	 List<String> lines = new ArrayList<>(Arrays.asList("spring", "node", "mkyong"));
          List<String> result = getFilterOutput(lines, "mkyong");
          for (String temp : result) {
              System.out.println(temp);    //output : spring, node
-         }
-         
-    	 System.out.println(users.toString());
+         }   	 
     	 
-    	 
-    	 List<Users> userss = 
+    	 List<Users> users = 
     			 lines
     			 .stream()
     			 .map(element->new Users(1l, element, element,  Arrays.asList(new Product(2l, element, new BigDecimal(355.54).setScale(2, RoundingMode.CEILING)))))
     			 .collect(Collectors.toList());
     	 System.out.println();
-    	 System.out.println(userss.toString());
-        return userss;
+    	 System.out.println(users.toString());
+        return users;
      }
 
      private static List<String> getFilterOutput(List<String> lines, String filter) {
          List<String> result = new ArrayList<>();
-         for (String line : lines) {
-             if (!"mkyong".equals(line)) { // we dont like mkyong
-                 result.add(line);
-             }
-         }
+//         for (String line : lines) {
+//             if (!"mkyong".equals(line)) { // we dont like mkyong
+//                 result.add(line);
+//             }
+//         }
+         
+         result = lines.stream()
+        		 .filter(line -> filter.equals(line))
+        		 .collect(Collectors.toList());
+         System.out.println(result.toString());
          return result;
+     }
+     
+     public boolean passedCheck() {
+         LoanApplicationService loanAppService = new LoanApplicationService();;
+         List<LoanApplication> allActiveLoans = Collections.emptyList();
+         List<LoanApplication> activeLoans = Collections.emptyList();
+         
+         
+		allActiveLoans = loanAppService.findActiveByClientPin()
+				.stream()
+				.filter(a -> a.isActive())
+				.collect(Collectors.toList());
+		
+		
+		
+         activeLoans = allActiveLoans.stream()
+                 .filter(a -> a.isAgreementSigned())
+                 .collect(Collectors.toList());
+
+         if (activeLoans.isEmpty()) {
+             return true;
+         }
+         
+         boolean isPassedChack = activeLoans.size() <= 2;
+         return isPassedChack;
      }
 }
