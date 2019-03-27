@@ -27,5 +27,4 @@ public class SequentialSearch {
         }
         return false;
     }
-
 }

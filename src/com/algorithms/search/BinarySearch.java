@@ -41,6 +41,7 @@ public class BinarySearch {
 	        low = mid + 1;
 	      }
 	    }
+	    
 	    return false;
 	  }
 	}
