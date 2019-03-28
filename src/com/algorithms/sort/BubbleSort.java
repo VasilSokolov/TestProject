@@ -1,6 +1,7 @@
 package com.algorithms.sort;
 
 public class BubbleSort {
+	
 	static int intArray[] = { 1000, 1, 100, 101, 15 };
 
 	public static void doSort() {
