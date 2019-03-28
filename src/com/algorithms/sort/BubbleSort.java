@@ -22,6 +22,7 @@ public class BubbleSort {
 	}
 
 	public static void main(String[] args) {
+		
 		System.out.print("Array Before Sorting->");
 		printArray();
 		doSort();
