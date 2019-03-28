@@ -25,6 +25,7 @@ public class BubbleSort {
 		System.out.print("Array Before Sorting->");
 		printArray();
 		doSort();
+		
 		System.out.print("\nArray After Sorting ->");
 		printArray();
 	}
