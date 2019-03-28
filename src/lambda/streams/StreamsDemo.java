@@ -201,6 +201,7 @@ public class StreamsDemo {
 //				.findFirst()
 //				.orElse(null);
 //				.forEach(v -> list.add(v));
+		
 		list.forEach(o -> System.out.printf("%s %s is not in the new list!%n", o.getFirstName(), o.getLastName()));
 		System.out.println("---------------------");
 		for (Person original : originalPeople) {
