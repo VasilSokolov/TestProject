@@ -13,6 +13,7 @@ public class BubbleSort {
 	      }//inner loop ends
 	    }//outer loop ends
 	  }
+	  
 	  public static void printArray() {
 	    for (int i = 0; i < intArray.length; i++) {
 	      System.out.print(" " + intArray[i]);
