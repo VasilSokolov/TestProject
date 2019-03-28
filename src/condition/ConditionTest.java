@@ -1,6 +1,8 @@
 package condition;
 
 public class ConditionTest {
+	GearService gs = new GearServiceIml();
+	
 
 	public static void main(String[] args) {
 		
@@ -17,6 +19,11 @@ public class ConditionTest {
 		}else{
 			System.out.println("is Out");
 		}
+		
+		ConditionTest ct = new ConditionTest();
+		ct.chechIsBetween(70);
+		ct.adding();
+		ct.getting();
 	}
 	public String condition;
 	public static void AmpersandFirst(boolean first, boolean second) {
@@ -57,5 +64,27 @@ public class ConditionTest {
 		}
 	}
 	
+	public void chechIsBetween(int age) {
+		if( age > 18 && age < 71) {
+			System.out.println("Its applicable for loan with age: " + age);			
+		} else {
+			System.out.println("Not applicable");
+		}
+	}
+	
+	public void adding() {
+		GearML ml = new GearML();
+		ml.setActive(true);
+		
+		GearCl g = new GearCl();
+		g.setName("pesho");
+		g.setId(5);
+		gs.setGear(g);
+		gs.createGearMl(ml);
+		System.out.println("Addig gear " + gs.getGear() + " \nML: " + gs.getGearMl());
+	}
+	public void getting() {
+		System.out.println("Getting gear" + gs.getGear());
+	}
 
 }

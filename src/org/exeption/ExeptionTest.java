@@ -18,13 +18,13 @@ public class ExeptionTest {
 		users2.add("Gosho");
 		users2.add("Anna");
 		
-//		if (users.contains(users2)) {
-//			try {
-//				throw new DublicateExampleException("User is dublicated ");
-//			} catch (DublicateExampleException e) {
-//				System.out.println("Stack trance: "+e.getMessage());
-//			}
-//		}
+		if (users.contains(users2)) {
+			try {
+				throw new DublicateExampleException("User is dublicated ");
+			} catch (DublicateExampleException e) {
+				System.out.println("Stack trance: "+e.getMessage());
+			}
+		}
 	}
 
 }
