@@ -198,6 +198,7 @@ public class StreamsDemo {
 		originalPeople.stream()
 				.filter(p -> !newPeople.contains(p))
 				.forEach(list::add);
+		
 //				.findFirst()
 //				.orElse(null);
 //				.forEach(v -> list.add(v));

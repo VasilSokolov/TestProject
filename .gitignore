@@ -1,6 +1,7 @@
 *.classpath
-bin
 
 statistic\.html
 
 statistic_iute\.html
+
+bin/

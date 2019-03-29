@@ -19,6 +19,7 @@ public class LambdaExpressionTest {
 		LambdaExpressionTest lambda = new LambdaExpressionTest();
 //		lambda.streams();
 		lambda.streamArray();
+		
 	}
 	
 	public void streams() {
