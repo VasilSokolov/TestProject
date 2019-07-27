@@ -1,0 +1,60 @@
+version: '3.3'
+services:
+  ###########################################################
+  ###################     DATABASE    #######################
+  ###########################################################
+  #md-crm-db:
+   # image: "registry.iute.eu/db-test/db-moldova:0.9.9"
+   # container_name: md-crm-db
+   # volumes:
+   # - iute-md-db-data:/var/lib/postgresql/data   
+   # environment:
+   #   POSTGRES_PASSWORD: postgres
+  #    POSTGRES_DB: iute      
+ #   ports:
+ #   - 25432:5432
+   al-crm-db:
+     image: "registry.iute.eu/db-test/db-albania:0.9.9"
+     container_name: al-crm-db
+     volumes:
+     - iute-al-db-data:/var/lib/postgresql/data    
+     environment:
+       POSTGRES_PASSWORD: postgres
+       POSTGRES_DB: iute               
+     ports:
+     - 15432:5432
+   mk-crm-db:
+     image: "registry.iute.eu/db-test/db-macedonia:0.9.9"
+     container_name: mk-crm-db
+     volumes:
+     - iute-mk-db-data:/var/lib/postgresql/data    
+     environment:
+       POSTGRES_PASSWORD: postgres
+       POSTGRES_DB: iute               
+     ports:
+     - 35432:5432
+   bg-crm-db:
+     image: "postgres:11"
+     container_name: bg-crm-db
+     volumes:
+     - iute-bg-db-data:/var/lib/postgresql/data    
+     environment:
+       POSTGRES_PASSWORD: postgres
+       POSTGRES_DB: iute               
+     ports:
+     - 55432:5432
+  ###########################################################
+  ###################     APPLICATION    #######################
+  ###########################################################
+  #md-crm-app:
+   # image: "registry.iute.eu/les/les-app:2.88.0"
+    #container_name: md-crm-app   
+    #ports:
+    #- 8081:8080
+    #volumes:
+    #  -  /app/git/iute-crm/build/libs/iute-crm.war:/usr/local/tomcat/webapps/iute-crm.war
+       
+volumes:
+  iute-bg-db-data:
+  iute-al-db-data:
+  iute-mk-db-data:

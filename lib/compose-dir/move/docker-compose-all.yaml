@@ -1,0 +1,74 @@
+version: '3.3'
+services:
+ ###########################################################
+ ###################     DATABASE    #######################
+ ###########################################################
+    md-crm-db:
+       image: "registry.iute.eu/db-test/db-moldova:0.9.9"
+       container_name: md-crm-db
+       volumes:
+       - iute-md-db-data:/var/lib/postgresql/data
+       environment:
+         POSTGRES_PASSWORD: postgres
+         POSTGRES_DB: iute
+       ports:
+       - 5432:5432
+    ko-crm-db:
+       image: "registry.iute.eu/db-test/db-kosovo:0.9.9"
+       container_name: ko-crm-db
+       volumes:
+       - iute-ko-db-data:/var/lib/postgresql/data
+       environment:
+         POSTGRES_PASSWORD: postgres
+         POSTGRES_DB: iute
+    mk-crm-db:
+       image: "registry.iute.eu/db-test/db-macedonia:0.9.9"
+       container_name: mk-crm-db
+       volumes:
+       - iute-mk-db-data:/var/lib/postgresql/data
+       environment:
+         POSTGRES_PASSWORD: postgres
+         POSTGRES_DB: iute
+    al-crm-db:
+        image: "registry.iute.eu/db-test/db-albania:0.9.9"
+        container_name: al-crm-db
+        volumes:
+        - iute-al-db-data:/var/lib/postgresql/data    
+        environment:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: iute
+ ###########################################################
+ ###################     APPLICATION    #######################
+ ###########################################################
+    md-crm-app:
+       image: "registry.iute.eu/les/les-app:2.88.0"
+       container_name: md-crm-app
+       ports:
+       - 8081:8080
+       - 8000:8000
+   #volumes:
+     #-  /app/git/iute-crm/build/libs/iute-crm.war:/usr/local/tomcat/webapps/iute-crm.war
+       entrypoint: /usr/local/tomcat/bin/catalina.sh jpda run
+       environment:
+         JPDA_ADDRESS: 8000
+         JPDA_TRANSPORT: dt_socket
+   #   - JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,address=62001,server=y,suspend=n"
+   #   JDPA_OPTS: -agentlib:jdwp=transport=dt_socket,address=62002,server=y,suspend=n
+      #JPDA_ADDRESS: 8000
+      #JPDA_TRANSPORT: dt_socket
+      #CATALINA_OPTS: -Xdebug -Xrunjdwp:transport=dt_socket,address=62911,server=y,suspend=n
+
+ ###########################################################
+ ###################   corrections / admin    ##############
+ ###########################################################
+ #admin-corrections:
+ #  image: "openjdk:11-jdk-sid"
+ #  container_name: admin-corrections
+ #  command: java -jar /corrections.jar
+ #  volumes:
+ #    -  /app/git/iute-crm/microservices/corrections/corrections-impl/build/libs/corrections-impl.jar:/corrections.jar
+volumes:
+ iute-mk-db-data:
+ iute-ko-db-data:
+ iute-md-db-data:
+ iute-al-db-data:

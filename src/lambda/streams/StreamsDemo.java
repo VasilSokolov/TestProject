@@ -1,18 +1,16 @@
 package lambda.streams;
 
-import static org.mockito.Matchers.contains;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import lambda.model.LoanApplication;
@@ -23,6 +21,8 @@ import lambda.model.Users;
 
 public class StreamsDemo {
 
+	private static final Logger logger = Logger.getLogger("StreamsDemo");
+	
 	public static void main(String[] args) {
 		StreamsDemo demo = new StreamsDemo();
 
@@ -31,7 +31,8 @@ public class StreamsDemo {
 //		System.out.println(addData.toString());
 //		boolean isPassed = demo.passedCheck();
 //		System.out.println("Sign: " + isPassed);
-		
+		logger.info("Result");
+//		log.error("CxmService call sendClientProfile method : "); 
 		demo.addDataInList();
 	}
 
