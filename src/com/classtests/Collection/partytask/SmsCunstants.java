@@ -16,9 +16,15 @@ public enum SmsCunstants {
      SMS_STATUS_WRONG_MSISDN ("wrong_msisdn"), // HTTP status code 431
      SMS_STATUS_WRONG_SENDER ("wrong_sender"); // HTTP status code 406
 
+	
+	
      private String smsStatus;
      
-     @Override
+     private SmsCunstants(String smsStatus) {
+		this.smsStatus = smsStatus;
+	}
+
+	@Override
      public String toString() {
          return smsStatus;
      }
