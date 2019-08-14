@@ -4,15 +4,6 @@ import java.beans.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class LoanApplication {
 
 	    private Integer id;
@@ -74,15 +65,12 @@ public class LoanApplication {
 
 	    private Date paidOutDate;
 
-	    @Builder.Default
 	    private Double totalSum = 0.0;
 
-	    @Builder.Default
 	    private Double monthlyPayback = 0.0;
 
 	    private String loanOffice;
 
-	    @Builder.Default
 	    private Double paid = 0.0;
 
 	    private String action;

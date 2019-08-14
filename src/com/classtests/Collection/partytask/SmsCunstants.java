@@ -1,8 +1,5 @@
 package com.classtests.Collection.partytask;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public enum SmsCunstants {
 	
 	 SMS_STATUS_SENT("sent"),            //sent to SMS gateway
