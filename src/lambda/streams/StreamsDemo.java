@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import lambda.model.InstallmentTable;
 import lambda.model.LoanApplication;
 import lambda.model.LoanApplicationService;
 import lambda.model.Person;
@@ -33,7 +34,8 @@ public class StreamsDemo {
 //		System.out.println("Sign: " + isPassed);
 		logger.info("Result");
 //		log.error("CxmService call sendClientProfile method : "); 
-		demo.addDataInList();
+//		demo.addDataInList();
+		demo.countFee();
 	}
 
 	private List<String> items() {
@@ -213,6 +215,28 @@ public class StreamsDemo {
 		}
 		
 		return list;
+	}
+	
+	private List<InstallmentTable> listInstalmentTable() {
+		List<InstallmentTable> list = new ArrayList<>();
+		list.add(new InstallmentTable(750d, true));
+		list.add(new InstallmentTable(250d, true));
+		list.add(new InstallmentTable(350d, true));
+		list.add(new InstallmentTable(150d, true));
+		list.add(new InstallmentTable(0d, true));
+		list.add(new InstallmentTable(50d, false));
+		list.add(new InstallmentTable(250d, false));
+		
+		return list;
+	}
+	
+	private void countFee() {
+		List<InstallmentTable> listInstalmentTable = listInstalmentTable();
+		long count = listInstalmentTable.stream().filter(i -> i.isSuspended() && i.getNotPaid() > 0).count();
+
+        Double result = 0.1 * count;
+
+		logger.info(result.toString());
 	}
 
 }
