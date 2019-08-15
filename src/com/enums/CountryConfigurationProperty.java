@@ -92,7 +92,8 @@ public enum CountryConfigurationProperty {
     MOLDOVA_SMS_URL("sms.moldova.provider.url"),
     MOLDOVA_SMS_PID("sms.moldova.pid"),
     MOLDOVA_SMS_PASSWORD("sms.moldova.password"),
-    MOLDOVA_SMS_ALIAS("sms.moldova.alias");
+    MOLDOVA_SMS_ALIAS("sms.moldova.alias"),
+	SMS("SMS");
 
     private final String code;
 
