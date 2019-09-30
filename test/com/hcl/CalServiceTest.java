@@ -7,7 +7,10 @@ import static org.mockito.Mockito.*;
 import junit.framework.Assert;
 
 public class CalServiceTest {
+	
 	public String l;
+	l=0;
+	
 	CalService calService;
 	@Before
 	public void setup(){
