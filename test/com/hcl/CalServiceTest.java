@@ -8,7 +8,9 @@ import static org.mockito.Mockito.*;
 import junit.framework.Assert;
 
 public class CalServiceTest {
-	public void String s;
+	
+	public void String m;
+	
 	CalService calService;
 	@Before
 	public void setup(){
