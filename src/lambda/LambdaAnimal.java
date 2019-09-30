@@ -9,6 +9,7 @@ public class LambdaAnimal {
 	private Integer age;
 	private BigDecimal weighs;
 	
+	
 	public LambdaAnimal() {
 	}
 	

@@ -1,5 +1,6 @@
 package project.test;
 
+
 public class Animal {
 	private String gender; 
 	private int legs;

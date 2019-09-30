@@ -11,6 +11,8 @@ public class CalServiceTest {
 	
 	public void String m;
 	
+	public String l;
+
 	CalService calService;
 	@Before
 	public void setup(){

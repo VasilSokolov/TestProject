@@ -19,6 +19,7 @@ public class LambdaExpressionTest {
 		LambdaExpressionTest lambda = new LambdaExpressionTest();
 //		lambda.streams();
 		lambda.streamArray();
+		
 	}
 	
 	public void streams() {
@@ -104,7 +105,6 @@ public class LambdaExpressionTest {
 				new LambdaAnimal(2l,"Eagle", 11, new BigDecimal(27.4).setScale(2, RoundingMode.CEILING))
 		};
 	
-		//Arrays.stream
         Stream<LambdaAnimal> stream1 = Arrays.stream(animal);
         stream1.forEach(x -> System.out.println(x));
 		
