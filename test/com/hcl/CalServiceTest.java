@@ -9,9 +9,7 @@ import junit.framework.Assert;
 
 public class CalServiceTest {
 	
-	public void String m;
-	
-	public String l;
+	public void String z;
 
 	CalService calService;
 	@Before
