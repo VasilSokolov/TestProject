@@ -4,10 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
+
 import junit.framework.Assert;
 
 public class CalServiceTest {
-	
+	public void String s;
 	CalService calService;
 	@Before
 	public void setup(){
