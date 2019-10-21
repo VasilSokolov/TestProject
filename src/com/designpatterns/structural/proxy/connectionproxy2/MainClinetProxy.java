@@ -9,8 +9,7 @@ public class MainClinetProxy {
 			//TODO get error message for access denied 
 			internet.connectTo("abv.bg");
 			
-		} catch (Exception e) {
-			
+		} catch (Exception e) {			
 			System.out.println(e.getMessage().toString());
 		}
 	}
