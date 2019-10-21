@@ -6,10 +6,12 @@ public class MainClinetProxy {
 		Internet internet = new ProxyInternet();
 		try {
 			internet.connectTo("geek.bg");
-			//TODO get error
+			//TODO get error message for access denied 
 			internet.connectTo("abv.bg");
+			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			
+			System.out.println(e.getMessage().toString());
 		}
 	}
 
