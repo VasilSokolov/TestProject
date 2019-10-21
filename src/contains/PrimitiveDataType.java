@@ -38,7 +38,7 @@ public class PrimitiveDataType {
 
 	public static void main(String[] args) {
 		Short shorting = new Short("123");
-		// TODO Auto-generated method stub
+
 		PrimitiveDataType primitiveDataType = new PrimitiveDataType();
 		Object s1 = primitiveDataType.resolve(Short.class, "123");
 		Object s2 = primitiveDataType.resolve(shorting.getClass(), "123");

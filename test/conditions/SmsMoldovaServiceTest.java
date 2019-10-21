@@ -127,3 +127,134 @@
 //        assertEquals(message.getComment(),"We have problems");
 //    }
 //}
+
+
+
+
+
+//
+//package iute.crm.modules.sms;
+//
+//import static iute.crm.util.Constants.SMS_STATUS_DELIVERED;
+//import static iute.crm.util.Constants.SMS_STATUS_FAILED;
+//import static iute.crm.util.Constants.SMS_STATUS_SENT;
+//import static java.util.Arrays.asList;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertThat;
+//import static org.mockito.ArgumentMatchers.any;
+//import static org.mockito.Mockito.mock;
+//import static org.mockito.Mockito.when;
+//
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//import org.hamcrest.Matchers;
+//import org.joda.time.DateTime;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.mockito.Mock;
+//import org.mockito.MockitoAnnotations;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//import org.springframework.test.util.JsonExpectationsHelper;
+//
+//import iute.crm.dao.CountryConfigurationDao;
+//import iute.crm.form.CountryConfiguration;
+//import iute.crm.modules.countryconfiguration.CountryConfigurationGroup;
+//
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = {SmsMoldovaService.class, CountryConfigurationDaoDumpImpl.class})
+//public class SmsMoldovaServiceTest {
+//    
+//    @Mock
+//    private CountryConfigurationDao countryConfigurationDao = mock(CountryConfigurationDaoDumpImpl.class);
+//    
+//    @Bean(name = "countryConfigurationDao")
+//    public CountryConfigurationDao getCountryConfigurationDao() {
+//        return countryConfigurationDao;
+//    }
+//
+//    @Autowired
+//    protected SmsMoldovaService service;
+//    
+//    @Before
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//
+//        List<CountryConfiguration> findAllByGroup = new ArrayList<>();
+//        
+//        when(countryConfigurationDao.findAllByGroup(CountryConfigurationGroup.SMS.toString())).thenReturn(findAllByGroup);
+//        when(countryConfigurationDao.findAllByGroup(any(String.class))).thenReturn(findAllByGroup);
+//    }
+//    
+//    @Test
+//    public void createMessage() throws Exception {
+//        SmsMessage message = new SmsMessage();
+//        message.setSendToNumber("37379109942");
+//        message.setText("1234567890");
+//
+//        String content  = service.createMessage(message);
+//        String expected = "{\"DNIS\":\"37379109942\",\"ANI\":\"\",\"Enc\":\"UTF8\",\"BMess\":\"1234567890\"}";
+//        new JsonExpectationsHelper().assertJsonEqual(expected, content);
+//    }
+//
+//    @Test
+//    public void updateStatuses() {
+//        SmsMessage withoutError = new SmsMessage();
+//        withoutError.setId(1);
+//        SmsMessage withError = new SmsMessage();
+//        withError.setId(2);
+//        SmsMessage withTechnicalError = new SmsMessage();
+//        withTechnicalError.setId(3);
+//
+//        Map<Integer, String> responses = new HashMap<>();
+//        responses.put(1, "{\"RStatus\":0,\"NRID\":\"id-from-server\"}");
+//        responses.put(2, "{\"RStatus\":1,\"ErrorMessage\":\"Invalid PID\"}");
+//        responses.put(3, "{\"RStatus\":100,\"ErrorMessage\":\"technical error\"}");
+//
+//        service.updateStatuses(asList(withoutError, withError, withTechnicalError), responses);
+//
+//        assertEquals(withoutError.getStatus(),SMS_STATUS_SENT);
+//        assertEquals(withoutError.getMessageId(),"id-from-server");
+//        assertEquals(withError.getStatus(),SMS_STATUS_FAILED);
+//        assertEquals(withError.getComment(),"Invalid PID");
+//        assertEquals(withTechnicalError.getStatus(),SMS_STATUS_FAILED);
+//        assertEquals(withTechnicalError.getComment(),"technical error");
+//    }
+//
+//    @Test
+//    public void updateStatus_without_error() {
+//        SmsMessage message = new SmsMessage();
+//
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("DStatus", 0);
+//        response.put("DDate", "2017-06-18 13:34:09");
+//        response.put("DMessage", "Delivered");
+//
+//        service.updateStatus(message, response);
+//
+//        assertEquals(message.getStatus(),SMS_STATUS_DELIVERED);
+//        assertEquals(message.getComment(),"Delivered");
+//        assertThat(message.getDelivered(),Matchers.comparesEqualTo(DateTime.parse("2017-06-18T13:34:09").toDate()));
+//    }
+//
+//    @Test
+//    public void updateStatus_with_error() {
+//        SmsMessage message = new SmsMessage();
+//
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("DStatus", 1);
+//        response.put("DMessage", "We have problems");
+//
+//        service.updateStatus(message, response);
+//
+//        assertEquals(message.getStatus(),SMS_STATUS_FAILED);
+//        assertEquals(message.getComment(),"We have problems");
+//    }
+//}
+

@@ -8,6 +8,7 @@ public class LambdaAnimal {
 	private String name;
 	private Integer age;
 	private BigDecimal weighs;
+	private String property;
 	
 	
 	public LambdaAnimal() {
@@ -18,6 +19,25 @@ public class LambdaAnimal {
 		this.name = name;
 		this.age = age;
 		this.weighs = weighs;
+	}
+	
+	
+
+	public LambdaAnimal(Long id, String name, Integer age, BigDecimal weighs, String property) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.weighs = weighs;
+		this.property = property;
+	}
+
+	public String getProperty() {
+		return property;
+	}
+
+	public void setProperty(String property) {
+		this.property = property;
 	}
 
 	public Long getId() {
