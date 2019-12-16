@@ -2,10 +2,18 @@ package condition;
 
 public class ConditionTest {
 	GearService gs = new GearServiceIml();
-	
+
+	public String condition;
 
 	public static void main(String[] args) {
-		
+
+		byte a = 127; 
+		byte b = 127; 
+//		b = a + b; // error : cannot convert from int to byte 
+		b += a; // ok
+
+		System.out.println(b);
+		System.out.println();
 		boolean first =true;
 		boolean second = false;
 		
@@ -25,7 +33,7 @@ public class ConditionTest {
 		ct.adding();
 		ct.getting();
 	}
-	public String condition;
+	
 	public static void AmpersandFirst(boolean first, boolean second) {
 		if (first && first ) {
 			System.out.println("If first:"+first +", second: "+first);

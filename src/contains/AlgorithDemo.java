@@ -18,8 +18,8 @@ public class AlgorithDemo{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		AlgorithmsStrOfData algorithmsStrOfData = new AlgorithmsStrOfData();
-		
+//		AlgorithmsStrOfData algorithmsStrOfData = new AlgorithmsStrOfData();
+//		
 //		algorithmsStrOfData.hashMapDemo();
 //		algorithmsStrOfData.treeMapDemo();
 //		algorithmsStrOfData.linkedHashMapDemo();
@@ -29,6 +29,7 @@ public class AlgorithDemo{
 //		algorithmsStrOfData.enumSet();
 //		algorithmsStrOfData.linkedHashMapDemo();
 		
+		compareObjWolf();
 //		person.setName("pesho");
 //		
 //		System.out.println(person.toString());
@@ -36,6 +37,22 @@ public class AlgorithDemo{
 		
 //		getConstr();
 		
+	}
+	
+	
+	
+	public static void compareObjWolf() {
+
+		Wolf w1 = new Wolf("W1","red", 12);
+		Wolf w2 = new Wolf("W2","RED", 12);
+		
+		boolean result = false;
+		
+		if (w1.equals(w2)) {
+			result = true;
+		}
+		
+		System.out.println("Is equal: " + result);
 	}
 	
 	@SuppressWarnings("unused")
@@ -46,22 +63,24 @@ public class AlgorithDemo{
 	}
 
 	public static void testIsItPalindrome() {
-		String str = "ababaa";
+		String str = "acababa";
 		
 		String[] strArray = str.split("");
-		
-		int end = strArray.length -1;
-		String result = "polindrom";
-		for (int i = 0; i < strArray.length; i++, end--) {
-			if(i > end) {
-				if(strArray[i].equals(strArray[end])) {
-					System.out.println("It's " + result);
-				} else {
-					System.out.println("It's not " + result);
-				}
+		int length = strArray.length; 
+		int end = length - 1;
+		String result = "Palindrome";
+		boolean isPolindrome = false;
+		for (int i = 0; i < length; i++, end--) {
+			if(strArray[i].equals(strArray[end])) {
+				isPolindrome = true;
+			} else {
+				isPolindrome = false;
 				break;
 			}
 		}
+		
+		String res = isPolindrome ? "It's " + result : "It's not " + result;
+		System.out.println(res);
 		
 //		HashSet<Integer> set = new HashSet<Integer>();
 //		set.add(3);
