@@ -1,0 +1,97 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-05-07-aftersale-changes" author="ivar">
+        <sql>
+            ALTER TABLE aftersale_campaign add COLUMN max_active_loans int default 0;
+            ALTER TABLE aftersale_campaign add COLUMN campaign_base varchar(32) default 'next';
+            ALTER TABLE aftersale_campaign add COLUMN closed_days int default 0;
+        </sql>
+    </changeSet>
+    <changeSet id="2019-05-22-aftersale-last-loans-view" author="ivar">
+        <sql>
+<![CDATA[
+            drop view if exists last_loans_view;
+
+            create view last_loans_view as
+            select id,
+                   client_pin,
+                   created,
+                   status,
+                   active,
+                   total_sum,
+                   loan_product_id,
+                   paid,
+                   closed_date::date,
+                   now()::date - closed_date::date as days_ago,
+                   closed,
+                   row_number() over
+                       (PARTITION BY client_pin
+                       order by created desc)      as lrk
+            from loan_application
+            order by client_pin, created desc;
+            ]]>
+</sql>
+    </changeSet>
+
+    <changeSet id="2019-05-24-aftersale-last-loans-fix-view" author="ivar">
+        <sql>
+<![CDATA[
+            drop view if exists last_loans_view;
+
+            create view last_loans_view as
+            select id,
+                   client_pin,
+                   created,
+                   status,
+                   active,
+                   total_sum,
+                   loan_product_id,
+                   paid,
+                   closed_date::date,
+                   now()::date - closed_date::date as days_ago,
+                   closed,
+                   refinanced_with is not null     as refinanced,
+                   row_number() over
+                       (PARTITION BY client_pin
+                       order by created desc)      as lrk
+            from loan_application
+            order by client_pin, created desc;
+            ]]>
+</sql>
+    </changeSet>    <changeSet id="2019-05-27-aftersale-last-loans-current-updates-view" author="ivar">
+        <sql>
+<![CDATA[
+            drop view if exists last_loans_view;
+
+            create view last_loans_view as
+            select id,
+                   client_pin,
+                   created,
+                   status,
+                   active,
+                   total_sum,
+                   loan_product_id,
+                   paid,
+                   paid_out_date,
+                   closed_date::date,
+                   now()::date - closed_date::date as days_ago,
+                   closed,
+                   refinanced_with is not null     as refinanced,
+                   row_number() over
+                       (PARTITION BY client_pin
+                       order by created desc)      as lrk
+            from loan_application
+            order by client_pin, created desc;
+            ]]>
+</sql>
+    </changeSet>
+    <changeSet id="2019-05-27-aftersale-campaign-changes" author="ivar">
+        <sql>
+            ALTER TABLE aftersale_campaign add COLUMN paid_out_after date;
+            ALTER TABLE aftersale_campaign add COLUMN paid_out_before date;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

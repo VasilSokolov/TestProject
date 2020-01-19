@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-04-25:add-credit_authority-table" author="comul">
+        <sql>
+            CREATE TABLE credit_authority (
+                id                  SERIAL PRIMARY KEY NOT NULL,
+                country             VARCHAR(20) NOT NULL,
+                report_source       VARCHAR(20),
+                report_name         VARCHAR(60),
+                client_pin          VARCHAR(50),
+                loan_application_id BIGINT,
+                fetch_time          TIMESTAMPTZ NOT NULL DEFAULT(current_timestamp AT TIME ZONE 'UTC'),
+                report_context      JSONB
+            );
+
+            CREATE INDEX credit_authority_pin ON credit_authority (client_pin);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

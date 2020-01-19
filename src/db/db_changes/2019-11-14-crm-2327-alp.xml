@@ -1,0 +1,21 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="2018-08-17:add-vllesa_co-config" author="alp">
+		<insert tableName="country_configuration">
+			<column name="property_group" value="partner"></column>
+			<column name="property" value="vllesa_co"></column>
+			<column name="description" value="Activates 'vllesa_co' functionality in CRM"></column>
+		</insert>
+
+		<insert tableName="property">
+			<column name="type" value="boolean"></column>
+			<column name="boolean_value" value="false"></column>
+			<column name="country_config_id" valueComputed="(select id from country_configuration where property_group='partner' and property='vllesa_co')"></column>
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>

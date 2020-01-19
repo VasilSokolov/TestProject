@@ -1,0 +1,54 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-07-30:adding-abi-config" author="konstantin">
+        <insert tableName="country_configuration">
+            <column name="property_group" value="partner"></column>
+            <column name="property" value="abi"></column>
+            <column name="description" value="Activates 'abi' functionality in CRM"></column>
+        </insert>
+
+        <insert tableName="property">
+            <column name="type" value="boolean"></column>
+            <column name="boolean_value" value="false"></column>
+            <column name="country_config_id" valueComputed="(select id from country_configuration where property_group='partner' and property='abi')"></column>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="2019-07-30:adding-moneta-config" author="konstantin">
+        <insert tableName="country_configuration">
+            <column name="property_group" value="partner"></column>
+            <column name="property" value="moneta"></column>
+            <column name="description" value="Activates 'moneta' functionality in CRM"></column>
+        </insert>
+
+        <insert tableName="property">
+            <column name="type" value="boolean"></column>
+            <column name="boolean_value" value="false"></column>
+            <column name="country_config_id" valueComputed="(select id from country_configuration where property_group='partner' and property='moneta')"></column>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="2019-07-30:renaming-capiral-to-capital" author="konstantin">
+    	<sql>
+            delete from property where country_config_id in (select id from country_configuration where property_group like 'partner' and property like 'capiral_ria');
+            delete from country_configuration where property_group like 'partner' and property like 'capiral_ria';
+        </sql>
+    </changeSet>
+    
+    <changeSet id="2019-07-30:adding-capital_ria-config" author="konstantin">
+        <insert tableName="country_configuration">
+            <column name="property_group" value="partner"></column>
+            <column name="property" value="capital_ria"></column>
+            <column name="description" value="Activates 'capital_ria' functionality in CRM"></column>
+        </insert>
+
+        <insert tableName="property">
+            <column name="type" value="boolean"></column>
+            <column name="boolean_value" value="false"></column>
+            <column name="country_config_id" valueComputed="(select id from country_configuration where property_group='partner' and property='capital_ria')"></column>
+        </insert>
+    </changeSet>
+    
+</databaseChangeLog>

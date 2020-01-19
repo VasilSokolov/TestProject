@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="2019-10-04-CRM-2368-fidel-xl-extra-product-albania" author="risto" context="albania">
+        <sql>
+            SELECT setval('loan_products_id_seq', 108, false);
+
+            INSERT INTO public.loan_products (
+            id, admission_fee_perc, apr_threshold, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest,
+            min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active,
+            salary_ratio_unofficial, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold,
+            turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit,
+            official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office,
+            enabled, sort_order, car_loan, max_car_value_perc, apr_threshold_evening, apr_threshold_evening_guarantee, guarantee_monthly_max, sms_sign_limit,
+            requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution, updated,
+            age_max_inclusive, age_min_inclusive, age_min_risky_inclusive, age_max_risky_inclusive, turnover_risky_threshold, paid_inst_records_risky_threshold,
+            turnover_risky_threshold_office, paid_inst_records_risky_threshold_office, available_for_dealer)
+            VALUES (
+            108, 31, NULL, 69.5, 14, 36, 300000, 55, 7,
+            13, 150000, 'Fidel XL Extra', false, false, false, 500, 'regular', 35, 40,
+            35, NULL, 0.25, 999, true, 4,
+            0, 17, 0, 0, 50000.01,
+            3, 0, 3, 0,
+            true, null, false, 0.0, NULL, NULL, 200, NULL,
+            false, false, true, 0, now(),
+            70, 18, 20, 68, 0, 4,
+            0, 3, false);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

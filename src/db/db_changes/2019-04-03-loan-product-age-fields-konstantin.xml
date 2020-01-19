@@ -1,0 +1,67 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-04-03-loan-product-age-fields" author="konstantin">
+        <sql>
+            ALTER TABLE loan_products ADD COLUMN age_max_inclusive INTEGER;
+            ALTER TABLE loan_products ADD COLUMN age_min_inclusive INTEGER;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-04-loan-product-age-risky-fields" author="konstantin">
+        <sql>
+            ALTER TABLE loan_products ADD COLUMN age_min_risky_inclusive INTEGER;
+            ALTER TABLE loan_products ADD COLUMN age_max_risky_inclusive INTEGER;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-08-delete-age_limit-from-country_configuration" author="konstantin">
+        <sql>
+            delete from property where country_config_id in (select id from country_configuration where property_group like 'client' and property like 'age_limit');
+            delete from country_configuration where property_group like 'client' and property like 'age_limit';
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="2018-10-13:add-client-age-limit" author="oleg">
+        <comment>CRM-857 Add configurable age limits into products settings page</comment>
+        <insert tableName="country_configuration">
+            <column name="property" value="age_min_limit" />
+            <column name="property_group" value="client" />
+            <column name="description" value="Min age limit" />
+        </insert>
+
+        <insert tableName="property">
+            <column name="country_config_id" valueComputed="(select id from country_configuration where property_group = 'client' and property = 'age_min_limit')" />
+            <column name="type" value="long" />
+            <column name="long_value" value="18" />
+        </insert>
+
+        <insert tableName="country_configuration">
+            <column name="property" value="age_max_limit" />
+            <column name="property_group" value="client" />
+            <column name="description" value="Max age limit" />
+        </insert>
+
+        <insert tableName="property">
+            <column name="country_config_id" valueComputed="(select id from country_configuration where property_group = 'client' and property = 'age_max_limit')" />
+            <column name="type" value="long" />
+            <column name="long_value" value="69" />
+        </insert>
+
+        <insert tableName="country_configuration">
+            <column name="property" value="risky_employment_types" />
+            <column name="property_group" value="client" />
+            <column name="description" value="Risky employment types" />
+        </insert>
+
+        <insert tableName="property">
+            <column name="country_config_id" valueComputed="(select id from country_configuration where property_group = 'client' and property = 'risky_employment_types')" />
+            <column name="type" value="string" />
+            <column name="string_value" value="entrepreneur,self_employed" />
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

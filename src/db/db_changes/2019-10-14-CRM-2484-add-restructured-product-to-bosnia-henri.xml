@@ -1,0 +1,67 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-10-14:add-restructured-product-to-bosnia" author="henri" context="bosnia">
+        <sql>
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution, updated, age_max_inclusive, age_min_inclusive, age_min_risky_inclusive, age_max_risky_inclusive, turnover_risky_threshold, paid_inst_records_risky_threshold, turnover_risky_threshold_office, paid_inst_records_risky_threshold_office, available_for_dealer)
+            VALUES (50, 33.5, 88, 88, 220, 19, 14, 1000000, 60, 7, 2, 1000, 'Restructured', false, false, false, 65, 'restructured', 50, 60, 50, 88, 89, 0.45, null, false, 2, 0, 17, 1, 0, null, 3, 0, 3, 0, false, null, false, 0, null, null, false, false, false, 0, '2019-09-05 11:12:36.754215', null, null, null, null, null, null, null, null, false);
+
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out)
+            VALUES (15, null, null, 25, 27, 5, 15, 120, null, 'general', 15, false, 50, null, null, null, null, null, null, null, null, null, 30);
+
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent)
+            VALUES
+                (0, 0, 18, 18, null, null, 1, 50, null),
+                (0, 0, 18, 18, null, null, 2, 50, null),
+                (0, 0, 18, 18, null, null, 3, 50, null),
+                (0, 0, 18, 18, null, null, 4, 50, null),
+                (0, 0, 18, 18, null, null, 5, 50, null),
+                (0, 0, 18, 18, null, null, 6, 50, null),
+                (0, 0, 18, 18, null, null, 7, 50, null),
+                (0, 0, 18, 18, null, null, 8, 50, null),
+                (0, 0, 18, 18, null, null, 9, 50, null),
+                (0, 0, 18, 18, null, null, 10, 50, null),
+                (0, 0, 18, 18, null, null, 11, 50, null),
+                (0, 0, 18, 18, null, null, 12, 50, null),
+                (0, 0, 18, 18, null, null, 13, 50, null),
+                (0, 0, 18, 18, null, null, 14, 50, null),
+                (0, 0, 18, 18, null, null, 15, 50, null),
+                (0, 0, 18, 18, null, null, 16, 50, null),
+                (0, 0, 18, 18, null, null, 17, 50, null),
+                (0, 0, 18, 18, null, null, 18, 50, null);
+
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id)
+            SELECT 50, id FROM public.doc_template
+            WHERE type IN (
+                'approve_distance_signing_guarantee_sms',
+                'approve_distance_signing_sms',
+                'closure_certificate',
+                'fifth_reminder_sms',
+                'first_reminder_sms',
+                'fourth_reminder_sms',
+                'frame_agreement',
+                'money_transferred_to_card_sms',
+                'posta_accepted_sms',
+                'posta_paid_out_sms',
+                'precontract',
+                'reduced_monthly_payments_sms',
+                'referral_bonus_sms',
+                'reminder_first',
+                'reminder_second',
+                'repayment_confirmation_sms',
+                'second_reminder_sms',
+                'signing_unsuccessful_first_sms',
+                'signing_unsuccessful_second_sms',
+                'sign_limit_exeeded_sms',
+                'sign_not_allowed_sms',
+                'specific_agreement',
+                'term',
+                'term_alert',
+                'third_reminder_sms',
+                'wrong_format_sms'
+            );
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>

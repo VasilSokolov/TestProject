@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-07-02:add-cc_migrated" author="cemil">
+        <addColumn tableName="client_profile">
+            <column name="ccl_migrated" type="boolean" defaultValueBoolean="false"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

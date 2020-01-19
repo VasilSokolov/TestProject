@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-08-23:add-bpay-related-columns" author="argo">
+        <addColumn tableName="client_profile">
+            <column name="bpay_account_nr" type="varchar(25)"></column>
+            <column name="bpay_blacklist" type="varchar(500)"></column>
+            <column name="bpay_form_needed" type="boolean" defaultValueBoolean="false"></column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2019-09-04:add-identification-document-to-client-profile" author="argo">
+        <createTable tableName="identification_document">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="client_id" type="numeric"></column>
+            <column name="document_type" type="varchar(16)"></column>
+            <column name="document_issued_by" type="varchar(16)"></column>
+            <column name="document_issue_date" type="date"></column>
+            <column name="document_expiry_date" type="date"></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2019-09-04:add-bpay-passport-needed-column" author="argo">
+        <addColumn tableName="client_profile">
+            <column name="bpay_idcopy_needed" type="boolean" defaultValueBoolean="false"></column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2019-10-22:change-client-id-type-to-match-enitity" author="argo">
+        <modifyDataType columnName="client_id" tableName="identification_document" newDataType="integer"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,71 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2019-08-15-cemil-ccl_income-table" author="cemil">
+		<sql>
+			CREATE TABLE public.ccl_income (
+				id 				serial NOT NULL,
+				country         varchar(3),
+				client_pin      varchar(20),
+				loan_app_id     bigint,
+				income_source 	varchar(20),
+				proof_level     varchar(20),
+				amount          numeric(14,2),
+				last_updated 	timestamptz DEFAULT(current_timestamp AT TIME ZONE 'UTC'),
+				last_migrated 	timestamptz DEFAULT(current_timestamp AT TIME ZONE 'UTC')
+			);
+			CREATE INDEX ccl_income_x1 ON ccl_income (country, client_pin);
+		</sql>
+		<sql>
+			CREATE TABLE public.ccl_extra (
+				id 					serial NOT NULL,
+				country         	varchar(3),
+				client_pin      	varchar(20),
+				loan_app_id     	bigint,
+				paid_installments	int,
+				other_debts_total	numeric(14,2),
+				last_updated 		timestamptz DEFAULT(current_timestamp AT TIME ZONE 'UTC'),
+				last_migrated 		timestamptz DEFAULT(current_timestamp AT TIME ZONE 'UTC')
+			);
+			CREATE INDEX ccl_extra_x1 ON ccl_extra (country, client_pin);
+		</sql>
+		<sql>
+			CREATE TABLE public.ccl_limits (
+				id 											serial NOT NULL,
+				country         							varchar(3),
+				client_pin      							varchar(20),
+				cxm_id          							varchar(20),
+				total_monthly_free_cashflow 				numeric(14,2),
+				customer_credit_limit_cash					numeric(14,2),
+				customer_credit_limit_dealer				numeric(14,2),
+				customer_credit_limit_pledge				numeric(14,2),
+				individual_apr_cash							numeric(14,2),
+				individual_apr_dealer						numeric(14,2),
+				individual_apr_pledge						numeric(14,2),
+				individual_loan_period_cash					numeric(14,2),
+				individual_loan_period_dealer				numeric(14,2),
+				individual_loan_period_pledge				numeric(14,2),
+				individual_max_monthly_installment_cash		numeric(14,2),
+				individual_max_monthly_installment_dealer	numeric(14,2),
+				individual_max_monthly_installment_pledge	numeric(14,2),
+				maximum_loan_amount_approved_cash 			numeric(14,2),
+				maximum_loan_amount_approved_dealer 		numeric(14,2),
+				maximum_loan_amount_approved_pledge 		numeric(14,2),
+				primary_fees_cash							numeric(14,2),
+				primary_fees_dealer							numeric(14,2),
+				primary_fees_pledge							numeric(14,2),
+				principal_cash								numeric(14,2),
+				principal_dealer							numeric(14,2),
+				principal_pledge							numeric(14,2),
+				last_updated 	timestamptz DEFAULT(current_timestamp AT TIME ZONE 'UTC')
+			);
+		</sql>
+		<sql>
+			CREATE INDEX ccl_limits_x1 ON ccl_limits (country, client_pin);
+		</sql>
+    </changeSet>
+
+</databaseChangeLog>

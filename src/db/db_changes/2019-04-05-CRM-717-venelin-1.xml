@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+     <changeSet id="2019-04-05-CRM-717" author="venelin">
+        <addColumn tableName="users">
+            <column name="callflow_api_username" type="varchar(5)"/>
+            <column name="callflow_api_password" type="varchar(20)"/>
+            <column name="callflow_api_code" type="varchar(5)"/>
+            <column name="callflow_api_cnumber" type="varchar(5)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

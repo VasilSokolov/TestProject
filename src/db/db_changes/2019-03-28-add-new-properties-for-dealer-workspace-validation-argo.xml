@@ -1,0 +1,47 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-03-26:add-dealer-workspace-require-docs-properties" author="argo">
+        <sql>
+            INSERT INTO country_configuration (property_group, property, description)
+            VALUES ('dealer', 'dealer_id_copy_required', 'Makes id copy required for all workspaces. Both for UI validation and dealer application submission.');
+            insert into property(country_config_id, type, boolean_value)
+            values ((select max(id) from country_configuration), 'boolean', false);
+
+            INSERT INTO country_configuration (property_group, property, description)
+            VALUES ('dealer', 'dealer_data_verification_required', 'Makes data verification file required for all workspaces.
+            Both for UI validation and dealer application submission. NB! This also depends on FA.');
+            insert into property(country_config_id, type, boolean_value)
+            values ((select max(id) from country_configuration), 'boolean', false);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-03-26:change-documents-required-for-countries" author="argo" context="albania,kosovo">
+        <sql>
+            UPDATE property set boolean_value = true
+            where country_config_id = (select id from country_configuration where property_group = 'dealer' and property = 'dealer_id_copy_required');
+
+            UPDATE property set boolean_value = true
+            where country_config_id = (select id from country_configuration where property_group = 'dealer' and property = 'dealer_data_verification_required');
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-03-27:remove-unused-properties" author="argo">
+        <sql>
+            delete from property where country_config_id = (select id from country_configuration where country_configuration.property = 'dealerInterfaceRequiresDocs');
+            delete from country_configuration where property = 'dealerInterfaceRequiresDocs';
+
+            delete from property where country_config_id = (select id from country_configuration where country_configuration.property = 'loanAppRequiresIdCopyAndDataVerification');
+            delete from country_configuration where property = 'loanAppRequiresIdCopyAndDataVerification';
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-09:change-files-data-verification-for-macedonia" author="argo" context="macedonia">
+        <sql>
+            UPDATE property set boolean_value = false
+            where country_config_id = (select id from country_configuration where property_group = 'files' and property = 'enableDataVerification');
+         </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,150 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet id="2019-09-10:add-bulgaria-country-configuration" author="dimitar" context="bulgaria">
+        <sql>
+
+            BEGIN;
+            -- protect against concurrent inserts while you update the counter
+            LOCK TABLE country_configuration IN EXCLUSIVE MODE;
+            -- Update the sequence
+            SELECT setval('country_configuration_id_seq', COALESCE((SELECT MAX(id)+1 FROM country_configuration), 1), false);
+            COMMIT;
+
+            BEGIN;
+            -- protect against concurrent inserts while you update the counter
+            LOCK TABLE property IN EXCLUSIVE MODE;
+            -- Update the sequence
+            SELECT setval('property_id_seq', COALESCE((SELECT MAX(id)+1 FROM property), 1), false);
+            COMMIT;
+
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (100, 0, null, null, 0, 0, 1, 1000, 0, 0, 1, 100, 'FFF (First For Free)', false, true, false, 0, 'regular', 50, 50, 50, 0, 0, 0, null, false, 0, 0, 21, 0, 0, null, 0, 0, 0, 0, true, null, false, 0, null, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (1, 0, null, null, 41.23, 10, 10, 1500, 41.23, 0, 2, 200, 'Basic', true, true, false, 0, 'regular', 33.4, 40, 33.4, 0, 0, 0, null, true, 0, 0, 21, 0, 0, null, 0, 0, 0, 0, true, 0, false, 0, null, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (2, 0, null, null, 41.23, 7, 24, 3000, 34.03, 0, 6, 200, 'Dealer', false, true, false, 0, 'dealer', 33.4, 40, 33.4, null, null, null, null, false, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, true, 0, false, 0, null, null, false, false, true, 0);
+            
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (null, 240, null, 30, 30, 15, 15, 10080, null, 'general', null, false, 2, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (30, null, null, 45, 60, 15, 15, 60, null, 'general', 15, false, 1, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (30, null, null, 45, 60, 15, 15, 60, null, 'general', 15, false, 100, null, null, null, null, null, null, null, null, null, 30);
+            
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (0, 0, 0, 0, 100, 1000, 1, 100, null);
+                        
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 1, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 2, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 3, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 4, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 5, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 6, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 7, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 8, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 9, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 10, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 11, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 12, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 13, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 14, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 15, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 16, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 17, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 18, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 19, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 20, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 21, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 22, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 23, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.10, 38.15, null, null, null, null, 24, 2, null);
+                        
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 1, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 2, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 3, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 4, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 5, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 6, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 7, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 8, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 9, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.58, 14.53, null, null, null, null, 10, 1, null);
+        </sql>
+    </changeSet>
+        
+    <changeSet id="2019-09-10:add-loan-product-configuration-for-fff" author="dimitar" context="bulgaria">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 100,
+            max_principal = 1000,
+            min_loan_period = 1,
+            max_loan_period = 1,
+            min_interest = 0.0,
+            max_interest = 0.0,
+            admission_fee_perc = 0.0,
+            salary_ratio_regular = 50,
+            salary_ratio_second_active = 50,
+            salary_ratio_unofficial = 50,
+            min_apr = 0.0,
+            max_apr = 0.0,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0,
+            age_min_inclusive = 18,
+            age_min_risky_inclusive = 21,
+            age_max_inclusive = 70,
+            age_max_risky_inclusive = 70
+            WHERE id = 100;
+
+            UPDATE loan_product_condition SET
+            loan_amount_from = 100,
+            loan_amount_to = 1000
+            WHERE loan_product_id = 100 and period = 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-09-10:add-loan-product-configuration-for-basic" author="dimitar" context="bulgaria">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 200,
+            max_principal = 1500,
+            min_loan_period = 2,
+            max_loan_period = 10,
+            min_interest = 0.0,
+            max_interest = 10.0,
+            admission_fee_perc = 14.53,
+            salary_ratio_regular = 33.4,
+            salary_ratio_second_active = 40,
+            salary_ratio_unofficial = 33.4,
+            min_apr = 41.23,
+            max_apr = 41.23,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0,
+            age_min_inclusive = 18,
+            age_min_risky_inclusive = 21,
+            age_max_inclusive = 70,
+            age_max_risky_inclusive = 70
+            WHERE id = 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-09-10:add-loan-product-configuration-for-dealer" author="dimitar" context="bulgaria">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 200,
+            max_principal = 3000,
+            min_loan_period = 6,
+            max_loan_period = 24,
+            min_interest = 0.0,
+            max_interest = 7.0,
+            admission_fee_perc = 38.15,
+            salary_ratio_regular = 33.4,
+            salary_ratio_second_active = 40,
+            salary_ratio_unofficial = 33.4,
+            min_apr = 34.03,
+            max_apr = 41.23,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0,
+            age_min_inclusive = 18,
+            age_min_risky_inclusive = 21,
+            age_max_inclusive = 70,
+            age_max_risky_inclusive = 70
+            WHERE id = 2;
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>

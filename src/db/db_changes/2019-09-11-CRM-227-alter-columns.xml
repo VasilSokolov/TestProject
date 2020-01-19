@@ -1,0 +1,236 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-09-23-add-neptun-preapproval-tables-to-other-countries" author="argo">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="neptun_preapproval"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="neptun_preapproval">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="imported_at" type="timestamp without timezone">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="neptun_client">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(100)">
+                <constraints nullable="false"/>collection_conditions
+            </column>
+            <column name="birth_date" type="timestamp without timezone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_pin" type="varchar(50)"/>
+            <column name="neptun_approval_client_id" type="bigint"/>
+        </createTable>
+
+        <addColumn tableName="neptun_client">
+            <column name="phone_number" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="2019-09-23:infodebit-debtor-table-to-other-countries" author="argo">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="infodebit_debtor"/>
+            </not>
+        </preConditions>
+
+        <sql>
+            CREATE TABLE infodebit_debtor (
+            id                  SERIAL PRIMARY KEY NOT NULL,
+            country             VARCHAR(3) NOT NULL,
+            client_pin          VARCHAR(50),
+            loan_application_id BIGINT,
+            fetch_time          TIMESTAMPTZ NOT NULL DEFAULT(current_timestamp AT TIME ZONE 'UTC'),
+            debtor_context      JSONB
+            );
+
+            CREATE INDEX infodebit_debtor_idnp ON infodebit_debtor ((debtor_context ->> 'debtor_idnp'));
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-09-23:add-crk-properties-to-other-countries" author="argo">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="crk_properties"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="crk_properties">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints foreignKeyName="id" references="users"/>
+            </column>
+            <column name="crk_username" type="varchar(40)"/>
+            <column name="crk_password" type="varchar(128)"/>
+            <column name="active"       type="boolean" defaultValueBoolean="true"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-customer-configuration-product-id" author="argo">
+        <modifyDataType tableName="customer_configuration" columnName="loan_product_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-eshop-products" author="argo">
+        <modifyDataType tableName="dealer_eshop_products" columnName="eshop_product_id"
+                        newDataType="int"/>
+        <modifyDataType tableName="dealer_eshop_products" columnName="dealer_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-product-campaign-id" author="argo">
+        <modifyDataType tableName="loan_application" columnName="loan_product_campaign_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-campaign-id" author="argo">
+        <modifyDataType tableName="loan_product_campaign" columnName="id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-campaign-product-id" author="argo">
+        <modifyDataType tableName="loan_product_campaign" columnName="loan_product_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-campaign-condition-id" author="argo">
+        <modifyDataType tableName="loan_product_campaign_condition" columnName="id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-campaign-condition-product-campaign-id" author="argo">
+        <modifyDataType tableName="loan_product_campaign_condition" columnName="loan_product_campaign_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-next-offer-settings-id" author="argo">
+        <modifyDataType tableName="loan_product_next_offer_settings" columnName="id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-next-offer-settings-active-loan-days" author="argo">
+        <modifyDataType tableName="loan_product_next_offer_settings" columnName="officially_active_loan_days"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-next-offer-settings-unofficially-active-loan-days" author="argo">
+        <modifyDataType tableName="loan_product_next_offer_settings" columnName="unofficially_active_loan_days"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-next-offer-settings-loan-product-id" author="argo">
+        <modifyDataType tableName="loan_product_next_offer_settings" columnName="loan_product_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-next-offer-settings-next-offer-loan-product-id" author="argo">
+        <modifyDataType tableName="loan_product_next_offer_settings" columnName="next_offer_loan_product_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-settings-bonus-task-duration" author="argo">
+        <modifyDataType tableName="loan_product_settings" columnName="bonus_task_duration_until_paid_out"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-official-paid-inst-records-threshold" author="argo">
+        <modifyDataType tableName="loan_products" columnName="official_paid_inst_records_threshold"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-official-paid-inst-records-threshold-office" author="argo">
+        <modifyDataType tableName="loan_products" columnName="official_paid_inst_records_threshold_office"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-paid-inst-records-threshold" author="argo">
+        <modifyDataType tableName="loan_products" columnName="paid_inst_records_threshold"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-paid-inst-records-threshold-office" author="argo">
+        <modifyDataType tableName="loan_products" columnName="paid_inst_records_threshold_office"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-sort-order" author="argo">
+        <modifyDataType tableName="loan_products" columnName="sort_order"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-turnover-risky-threshold" author="argo">
+        <modifyDataType tableName="loan_products" columnName="turnover_risky_threshold"
+                        newDataType="numeric"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-loan-product-turnover-risky-threshold-office" author="argo">
+        <modifyDataType tableName="loan_products" columnName="turnover_risky_threshold_office"
+                        newDataType="numeric"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-neptun-approval-client-id" author="argo">
+        <modifyDataType tableName="neptun_client" columnName="neptun_approval_client_id"
+                        newDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-overdue-process-settings-max-suspended-days" author="argo">
+        <modifyDataType tableName="overdue_process_settings" columnName="max_suspended_days"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-repayment-collection-company-id" author="argo">
+        <modifyDataType tableName="repayments" columnName="collection_company_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-settings-closed-loans-archival-threshold-years" author="argo">
+        <modifyDataType tableName="settings" columnName="closed_loans_archival_threshold_years"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-settings-defaulted-loans-archival-threshold-years" author="argo">
+        <modifyDataType tableName="settings" columnName="defaulted_loans_archival_threshold_years"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-temp-installment-missing-fields" author="argo">
+        <addColumn tableName="temp_installment">
+            <column name="first_rem_sms" type="numeric"/>
+            <column name="second_rem_sms" type="numeric"/>
+            <column name="third_rem_sms" type="numeric"/>
+            <column name="fourth_rem_sms" type="numeric"/>
+            <column name="fifth_rem_sms" type="numeric"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2019-09-11:change-data-type-of-user-user-id" author="argo">
+        <modifyDataType tableName="user_role" columnName="user_id"
+                        newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="2019-09-30:change-data-type-of-task-data-id" author="argo">
+        <modifyDataType tableName="task_data" columnName="id"
+                        newDataType="int"/>
+    </changeSet>
+
+</databaseChangeLog>
