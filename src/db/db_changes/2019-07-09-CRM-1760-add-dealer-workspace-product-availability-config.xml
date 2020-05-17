@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-07-09-CRM-1760-add-iute-workspace-product-availability-config" author="argo">
+        <addColumn tableName="loan_products">
+            <column name="available_for_dealer" type="boolean" defaultValue="false"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2019-07-09-CRM-1760-update-iute-workspace-true-for-regular-loans" author="argo">
+        <sql>
+            UPDATE loan_products set available_for_dealer = 'true' where type = 'regular';
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-07-09-CRM-1760-only-basic-dealer-available-in-iute-workspace" author="argo" context="albania">
+        <sql>
+            UPDATE loan_products set available_for_dealer = 'false' where type = 'regular' and name != 'Basic Dealer';
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-08-13:countryCheckInterestCorrectionOnTermination" author="risto">
+        <sql>
+            INSERT INTO country_configuration (property_group, property, description) VALUES ('installment', 'interestCorrectionOnTermination', 'Add interest correction repayment on termination moment');
+            INSERT INTO property(country_config_id, type, boolean_value) values ((select id from country_configuration where property = 'interestCorrectionOnTermination'), 'boolean', false);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-08-12:interestCorrectionField" author="risto">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="repayments" columnName="interest_correction"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="repayments">
+            <column name="interest_correction" type="boolean" defaultValueBoolean="false"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

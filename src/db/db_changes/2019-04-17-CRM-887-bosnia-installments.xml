@@ -1,0 +1,33 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-04-17:countryCheckAnnuityInstallments" author="risto">
+        <sql>
+            INSERT INTO country_configuration (property_group, property, description) VALUES ('installment', 'annuityBased', 'Annuity based installment table calculation');
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-17:countryCheckAnnuityInstallmentsAll" author="risto" context="moldova,albania,macedonia,kosovo">
+        <sql>
+            insert into property(country_config_id, type, boolean_value) values ((select id from country_configuration where property = 'annuityBased'), 'boolean', false);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-17:countryCheckAnnuityInstallmentsBh" author="risto" context="bosnia">
+        <sql>
+            insert into property(country_config_id, type, boolean_value) values ((select id from country_configuration where property = 'annuityBased'), 'boolean', true);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-17:effectiveInterestColumn" author="risto">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="loan_application" columnName="eir"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="loan_application">
+            <column name="eir" type="numeric"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

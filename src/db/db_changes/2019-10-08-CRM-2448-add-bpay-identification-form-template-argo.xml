@@ -1,0 +1,340 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-10-08-CRM-2448-add-bpay-identification-form-template-argo" author="argo" context="moldova">
+        <sql>
+            <![CDATA[
+                INSERT INTO doc_template(content, created, name, lang, last_updated, last_updated_user, type, template_type)
+                VALUES ('<table style="font-size: 70%;">
+                            <tbody>
+                            <tr>
+                            <td colspan="2">
+                            <h2 style="display: inline;">CHESTIONAR PENTRU IDENTIFICAREA CLIENTULUI PESOANA FIZICĂ (KYC)</h2>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2">
+                            <table style="border-collapse: collapse; page-break-inside: auto;font-size: 70%;">
+                            <tbody>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>A</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Date generale</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Numele, prenumele</strong>: (Фамилия, Имя) [last_name] [first_name]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Actul de identitate</strong>:(Документ, удостоверяющий личность) [id_document_type]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Seria, numărul</strong>: (серия, номер) [id_card_number]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Data eliberării:</strong> (дата выдачи) [id_document_issue_date]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Termen de valabilitate</strong>: (действителен до) [id_document_valid_until_date]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>IDNP</strong>: (идентификационный номер) [pin]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Data naşterii</strong>: (Дата рождения) [birth_date]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Adresa de domiciliu</strong>: (Адрес прописки) [street] [house] [apartment] [zip] [city]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Adresa de reşedinţă</strong>: (Адрес проживания) [residence_city] [residence_address]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Cetățenia</strong>: [country_iso3]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>B</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Datele de contact</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>tel. serviciu</strong>: (рабочий тел.) [phone_work]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>tel. domiciliu</strong>: (домашний тел) [phone_home]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>tel. mobil</strong>: (мобильный тел.) [phone_gsm]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>e-mail</strong>: [email]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>C</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Ocupaţia</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Sectorul de afaceri</strong>: (сфера деятельности.)&nbsp;[position_sector]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Funcția ocupată</strong>: (должность) [employment_position]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Durata de muncă</strong>: (срок занятости) [work_duration]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>D</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Funcţia publică deţinută (persoană expusă politic)<sup>1</sup>/(Выполняемая государственная должность /Политически уязвимые Лица)<sup>1</sup></h3>
+                            Conform Legii nr.158 din 04.07.2008 Сu privire la funcția publică și statutul funcționarului public / Согласно закону №158 от 04.07.2008 О государственной должности и статусе государственного служащего
+                            <p style="margin: 0px;padding: 0px;"><strong>Deținere statut PEP</strong>: (статус ПуЛ)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Daca DA</strong>: (если ДА)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>funcția ocupată</strong>: (занимаемая должность)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>afilierea cu entități</strong>: (аффилированость с структурами/компаниями)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>membri familiei</strong>: (члены семьи)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>persoanele asociate</strong>: (ассоциированые лица)</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>E</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">DECLARAŢIE privind identitatea beneficiarului efectiv<sup>2 </sup>/(ДЕКЛАРАЦИЯ о личности выгодоприобритающего собственника)</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Declar pe propria răspundere că beneficiarul efectiv este (Ответственно заявляю, что выгодоприобритающим собственником является)</strong></p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Numele, prenumele: (Фамилия, Имя)&nbsp;</strong>[last_name] [first_name]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>F</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">TRANZACȚIILE PRECONIZATE &Icirc;N SISTEMUL BPAY</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Preconizați să utilizați contul respectiv pentru acumularea plăților de la persoanele terțe ? ( dacă răspunsul este confirmativ descrieți activitatea preconizată)</strong>: NU</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>G</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">DECLAR:</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>1. Sunt proprietarul contului &icirc;n sistem_ul Bpay și ma folosesc de acest cont personal, sub numarul [bpay_account_nr].</strong></p>
+                            <p style="margin: 0px;padding: 0px;">Являюсь владельцем счета в системе Bpay и пользуюсь им лично, под номером [bpay_account_nr].)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>2. Am luat cunoștința și accept condițiile ,, Iute Credit&rsquo;&rsquo; SRL și a contractului-cadru, accesibil pe site-ul sistemului Bpay.</strong></p>
+                            <p style="margin: 0px;padding: 0px;">(Ознакомлен и принимаю условия рамочного договора, доступного на сайте системы Bpay)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>3. Toată informația prezentată &icirc;n anchetă este veridică.</strong> (Вся информация, представленная в анкете является достоверной.)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>4. Port răspunderea pentru tranzacțiile, efectuate de pe acountul meu &icirc;n sistemul Bpay, inclusiv dar nu se limitează: toate plățile, efectuate &icirc;n/din contul meu electronic, toate comenzile, &icirc;naintate cu utilizarea account-ul meu.</strong> (Несу ответственность за операции, осуществленные с моей учетной записи в системе Bpay, включая но неограничиваясь: за все платежи, осуществленные в/с моего электронного счета; все электронные заявления, поданныепри помощи моей учетной записи.)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>5. &Icirc;ntru evitarea furtului mijloacelor financiare sau utilizării neautorizate a acountului meu, mă oblig să păstrez, să nu divulg și să nu transmit persoanelor terțe datele pentru accesarea contului și anume: login, parola, PIN cod precum și mijloacele care asigură legătura/acces la cont (telefonul mobil, card, cripto-token etc.).</strong> (Во избежание кражи денежных средств или неавторизованного использования моей учетной записи, обязуюсьхранить, не разглашать и не передавать третьим лицам данные для доступа к счету, а именно: логин, пароль, PIN код атакже средства, обеспечивающие связь/доступ к счёту (мобильный телефон, карта, крипто-токен и т. п.).</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>6. Imediat de informat serviciul support Bpay despre toate cazurile cunoscute mie de pierdere, furt, compromițării datelor autorizate sau altei utilizării nelegale a acountului meu &icirc;n sistemul Bpay, precum și ne&icirc;nt&icirc;rziat de efectuat modificarea parolei și a PIN codului pe site-ul Bpay.md.</strong><br /> (Незамедлительно уведомить службу поддержки Bpay о всех известных мне случаях утери, кражи, компрометацииавторизационных данных или незаконного использования моей учетной записи в системе Bpay, а так женезамедлительно осуществить смену пароля и пин кода на сайте Bpay.md.)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>7. &Icirc;mi exprim acordul pentru prelucrarea datelor mele cu caracter personal.</strong><br /> (Даю согласие на хранение, использование и обработку моих персональных данных, согласно условиям рамочного договора)</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>H</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Sursa mijloacelor băneşti (Источник денежных средств)</h3>
+                            <br/>
+                            <p style="margin: 0px;padding: 0px;"><strong>Veniturile mele provin din activitatea</strong>: (источник получения доходов) [employment_type]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Nivelul mediu lunar al veniturilor</strong>: (среднемесячный получаемый доход) [total_income]</p>
+                            <p style="margin: 0px;padding: 0px;">&nbsp;</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Confirm corectitudinea datelor prezentate, &icirc;mi asum obligaţia să comunic &icirc;n scris către &rdquo;Iute Credit&rdquo; SRL și ,,Bpay SRL&rsquo;&rsquo; orice modificare referitoare la cele declarate mai sus. Confirm de asemenea provenienţa legală a mijloacelor băneşti utilizate pe parcursul executării obligațiilor contractuale față de &rdquo;Iute Credit&rdquo; SRL și ,,BPAY&rsquo;&rsquo; SRL</strong></p>
+                            <p style="margin: 0px;padding: 0px;">Я подтверждаю, что представленные данные верны, и я обязуюсь письменно уведомить &rdquo;Iute Credit&rdquo; SRL и &lsquo;&rsquo;Bpay&rsquo;&rsquo; SRL о любых изменениях, имеющих отношение к вышеуказанным фактам. Также я подтверждаю законное происхождение денег которые будут использованы во исполнение договорных обязательств перед &rdquo;Iute Credit&rdquo; SRL.</p>
+
+							<br/>
+							<table width="100%" style="font-size: 120%;">
+                            <tbody>
+								<tr>
+									<td>
+										<p style="margin: 0px;padding: 0px;">Data completării</p>
+										<p style="margin: 0px;padding: 0px;">(дата заполнения) [current_date]</p>
+									</td>
+									<td>
+										<p style="margin: 0px;padding: 0px;">Semnătura clientului</p>
+										<p style="margin: 0px;padding: 0px;">(подпись клиента)</p>
+									</td>
+								</tr>
+                            </tbody>
+                            </table>
+							<br/>
+
+                            </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2">
+							<table  width="100%" style="font-size: 78%;">
+							<tr><td>
+								<p align="justify" style="margin: 0px;padding: 0px;"><strong><sup>1</sup>Persoane Expuse Politic - persoane fizice care exercită sau care au exercitat pe parcursul ultimului an funcții publice importante la nivel național și/sau internațional, membri ai organelor de conducere ale partidelor politice, membrii familiei precum și persoanele asociate acestor persoane (art.3 din Legea cu privire la prevenirea şi combaterea spălării banilor şi finanţării terorismului, nr. 308 din 22.12.2017).</strong></p>
+								<p align="justify" style="margin: 0px;padding: 0px;"><em>Политически уязвимые Лица</em> &ndash; физические лица, которые исполняют или исполняли в течение прошедшего года важные государственные должности&shy; на национальном и/или международном уровне, члены &shy;руководящих органов политических партий, а также члены их семей и лица связанные с ними. (Ст.З., Закон о предупреждении и борьбе с отмыванием денег и финансированием терроризма № 308 от 22.12.2017).</p>
+								<br />
+								<p align="justify" style="margin: 0px;padding: 0px;"><strong><sup>2 </sup>Beneficiar efectiv - persoană fizică ce deține sau controlează &icirc;n ultimă instanță o persoană fizică sau juridică ori beneficiar al unei societăți de investiții sau administrator al societății de investiții, ori persoană &icirc;n al cărei nume se desfășoară o activitate sau se realizează o tranzacție și/sau care deține, direct sau indirect, dreptul de proprietate sau controlul asupra a cel puțin 25% din acțiuni sau din dreptul de vot al persoanei juridice ori asupra bunurilor aflate &icirc;n administrare fiduciară (art.3 din Legea cu privire la prevenirea şi combaterea spălării banilor şi finanţării terorismului, nr. 308 din 22.12.2017).</strong></p>
+								<p align="justify" style="margin: 0px;padding: 0px;">Выгодоприобритающий собственник - физическое лицо, которое в конечном счете владеет физическим либо юридическим лицом или контролирует его, либо бенефициар инвестиционного общества или управляющий инвестиционным обществом, либо лицо, от имени которого осуществляется деятельность или сделка и/или которое обладает прямо или косвенно правом собственности или контроля в отношении не менее 25 процентов акций или прав голоса юридического лица или в отношении имущества, находящегося в доверительном управлении (Ст.З., Закон о предупреждении и борьбе с отмыванием денег и финансированием терроризма № 308 от 22.12.2017).</p>
+							</td></tr>
+							</table>
+							</td>
+                            </tr>
+                            </tbody>
+                            </table>',
+                now(), 'Bpay identification form', 'rus', now(), 'argo', 'bpay_identification_form', 'letter');
+            ]]>
+        </sql>
+        <sql>
+            <![CDATA[
+                INSERT INTO doc_template(content, created, name, lang, last_updated, last_updated_user, type, template_type)
+                VALUES ('<table style="font-size: 70%;">
+                            <tbody>
+                            <tr>
+                            <td colspan="2">
+                            <h2 style="display: inline;">CHESTIONAR PENTRU IDENTIFICAREA CLIENTULUI PESOANA FIZICĂ (KYC)</h2>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2">
+                            <table style="border-collapse: collapse; page-break-inside: auto;font-size: 70%;">
+                            <tbody>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>A</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Date generale</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Numele, prenumele</strong>: (Фамилия, Имя) [last_name] [first_name]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Actul de identitate</strong>:(Документ, удостоверяющий личность) [id_document_type]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Seria, numărul</strong>: (серия, номер) [id_card_number]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Data eliberării:</strong> (дата выдачи) [id_document_issue_date]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Termen de valabilitate</strong>: (действителен до) [id_document_valid_until_date]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>IDNP</strong>: (идентификационный номер) [pin]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Data naşterii</strong>: (Дата рождения) [birth_date]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Adresa de domiciliu</strong>: (Адрес прописки) [street] [house] [apartment] [zip] [city]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Adresa de reşedinţă</strong>: (Адрес проживания) [residence_city] [residence_address]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Cetățenia</strong>: [country_iso3]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>B</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Datele de contact</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>tel. serviciu</strong>: (рабочий тел.) [phone_work]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>tel. domiciliu</strong>: (домашний тел) [phone_home]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>tel. mobil</strong>: (мобильный тел.) [phone_gsm]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>e-mail</strong>: [email]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>C</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Ocupaţia</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Sectorul de afaceri</strong>: (сфера деятельности.)&nbsp;[position_sector]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Funcția ocupată</strong>: (должность) [employment_position]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Durata de muncă</strong>: (срок занятости) [work_duration]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>D</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Funcţia publică deţinută (persoană expusă politic)<sup>1</sup>/(Выполняемая государственная должность /Политически уязвимые Лица)<sup>1</sup></h3>
+                            Conform Legii nr.158 din 04.07.2008 Сu privire la funcția publică și statutul funcționarului public / Согласно закону №158 от 04.07.2008 О государственной должности и статусе государственного служащего
+                            <p style="margin: 0px;padding: 0px;"><strong>Deținere statut PEP</strong>: (статус ПуЛ)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Daca DA</strong>: (если ДА)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>funcția ocupată</strong>: (занимаемая должность)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>afilierea cu entități</strong>: (аффилированость с структурами/компаниями)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>membri familiei</strong>: (члены семьи)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>persoanele asociate</strong>: (ассоциированые лица)</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>E</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">DECLARAŢIE privind identitatea beneficiarului efectiv<sup>2 </sup>/(ДЕКЛАРАЦИЯ о личности выгодоприобритающего собственника)</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Declar pe propria răspundere că beneficiarul efectiv este (Ответственно заявляю, что выгодоприобритающим собственником является)</strong></p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Numele, prenumele: (Фамилия, Имя)&nbsp;</strong>[last_name] [first_name]</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>F</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">TRANZACȚIILE PRECONIZATE &Icirc;N SISTEMUL BPAY</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>Preconizați să utilizați contul respectiv pentru acumularea plăților de la persoanele terțe ? ( dacă răspunsul este confirmativ descrieți activitatea preconizată)</strong>: NU</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>G</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">DECLAR:</h3>
+
+                            <p style="margin: 0px;padding: 0px;"><strong>1. Sunt proprietarul contului &icirc;n sistem_ul Bpay și ma folosesc de acest cont personal, sub numarul [bpay_account_nr].</strong></p>
+                            <p style="margin: 0px;padding: 0px;">Являюсь владельцем счета в системе Bpay и пользуюсь им лично, под номером [bpay_account_nr].)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>2. Am luat cunoștința și accept condițiile ,, Iute Credit&rsquo;&rsquo; SRL și a contractului-cadru, accesibil pe site-ul sistemului Bpay.</strong></p>
+                            <p style="margin: 0px;padding: 0px;">(Ознакомлен и принимаю условия рамочного договора, доступного на сайте системы Bpay)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>3. Toată informația prezentată &icirc;n anchetă este veridică.</strong> (Вся информация, представленная в анкете является достоверной.)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>4. Port răspunderea pentru tranzacțiile, efectuate de pe acountul meu &icirc;n sistemul Bpay, inclusiv dar nu se limitează: toate plățile, efectuate &icirc;n/din contul meu electronic, toate comenzile, &icirc;naintate cu utilizarea account-ul meu.</strong> (Несу ответственность за операции, осуществленные с моей учетной записи в системе Bpay, включая но неограничиваясь: за все платежи, осуществленные в/с моего электронного счета; все электронные заявления, поданныепри помощи моей учетной записи.)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>5. &Icirc;ntru evitarea furtului mijloacelor financiare sau utilizării neautorizate a acountului meu, mă oblig să păstrez, să nu divulg și să nu transmit persoanelor terțe datele pentru accesarea contului și anume: login, parola, PIN cod precum și mijloacele care asigură legătura/acces la cont (telefonul mobil, card, cripto-token etc.).</strong> (Во избежание кражи денежных средств или неавторизованного использования моей учетной записи, обязуюсьхранить, не разглашать и не передавать третьим лицам данные для доступа к счету, а именно: логин, пароль, PIN код атакже средства, обеспечивающие связь/доступ к счёту (мобильный телефон, карта, крипто-токен и т. п.).</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>6. Imediat de informat serviciul support Bpay despre toate cazurile cunoscute mie de pierdere, furt, compromițării datelor autorizate sau altei utilizării nelegale a acountului meu &icirc;n sistemul Bpay, precum și ne&icirc;nt&icirc;rziat de efectuat modificarea parolei și a PIN codului pe site-ul Bpay.md.</strong><br /> (Незамедлительно уведомить службу поддержки Bpay о всех известных мне случаях утери, кражи, компрометацииавторизационных данных или незаконного использования моей учетной записи в системе Bpay, а так женезамедлительно осуществить смену пароля и пин кода на сайте Bpay.md.)</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>7. &Icirc;mi exprim acordul pentru prelucrarea datelor mele cu caracter personal.</strong><br /> (Даю согласие на хранение, использование и обработку моих персональных данных, согласно условиям рамочного договора)</p>
+                            </td>
+                            </tr>
+                            <tr style="page-break-inside: avoid; page-break-after: auto;">
+                            <td style="border: 1px solid black;" width="19">
+                            <p>H</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                            <h3 style="display: inline;">Sursa mijloacelor băneşti (Источник денежных средств)</h3>
+                            <br/>
+                            <p style="margin: 0px;padding: 0px;"><strong>Veniturile mele provin din activitatea</strong>: (источник получения доходов) [employment_type]</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Nivelul mediu lunar al veniturilor</strong>: (среднемесячный получаемый доход) [total_income]</p>
+                            <p style="margin: 0px;padding: 0px;">&nbsp;</p>
+                            <p style="margin: 0px;padding: 0px;"><strong>Confirm corectitudinea datelor prezentate, &icirc;mi asum obligaţia să comunic &icirc;n scris către &rdquo;Iute Credit&rdquo; SRL și ,,Bpay SRL&rsquo;&rsquo; orice modificare referitoare la cele declarate mai sus. Confirm de asemenea provenienţa legală a mijloacelor băneşti utilizate pe parcursul executării obligațiilor contractuale față de &rdquo;Iute Credit&rdquo; SRL și ,,BPAY&rsquo;&rsquo; SRL</strong></p>
+                            <p style="margin: 0px;padding: 0px;">Я подтверждаю, что представленные данные верны, и я обязуюсь письменно уведомить &rdquo;Iute Credit&rdquo; SRL и &lsquo;&rsquo;Bpay&rsquo;&rsquo; SRL о любых изменениях, имеющих отношение к вышеуказанным фактам. Также я подтверждаю законное происхождение денег которые будут использованы во исполнение договорных обязательств перед &rdquo;Iute Credit&rdquo; SRL.</p>
+
+							<br/>
+							<table width="100%" style="font-size: 120%;">
+                            <tbody>
+								<tr>
+									<td>
+										<p style="margin: 0px;padding: 0px;">Data completării</p>
+										<p style="margin: 0px;padding: 0px;">(дата заполнения) [current_date]</p>
+									</td>
+									<td>
+										<p style="margin: 0px;padding: 0px;">Semnătura clientului</p>
+										<p style="margin: 0px;padding: 0px;">(подпись клиента)</p>
+									</td>
+								</tr>
+                            </tbody>
+                            </table>
+							<br/>
+
+                            </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2">
+							<table  width="100%" style="font-size: 78%;">
+							<tr><td>
+								<p align="justify" style="margin: 0px;padding: 0px;"><strong><sup>1</sup>Persoane Expuse Politic - persoane fizice care exercită sau care au exercitat pe parcursul ultimului an funcții publice importante la nivel național și/sau internațional, membri ai organelor de conducere ale partidelor politice, membrii familiei precum și persoanele asociate acestor persoane (art.3 din Legea cu privire la prevenirea şi combaterea spălării banilor şi finanţării terorismului, nr. 308 din 22.12.2017).</strong></p>
+								<p align="justify" style="margin: 0px;padding: 0px;"><em>Политически уязвимые Лица</em> &ndash; физические лица, которые исполняют или исполняли в течение прошедшего года важные государственные должности&shy; на национальном и/или международном уровне, члены &shy;руководящих органов политических партий, а также члены их семей и лица связанные с ними. (Ст.З., Закон о предупреждении и борьбе с отмыванием денег и финансированием терроризма № 308 от 22.12.2017).</p>
+								<br />
+								<p align="justify" style="margin: 0px;padding: 0px;"><strong><sup>2 </sup>Beneficiar efectiv - persoană fizică ce deține sau controlează &icirc;n ultimă instanță o persoană fizică sau juridică ori beneficiar al unei societăți de investiții sau administrator al societății de investiții, ori persoană &icirc;n al cărei nume se desfășoară o activitate sau se realizează o tranzacție și/sau care deține, direct sau indirect, dreptul de proprietate sau controlul asupra a cel puțin 25% din acțiuni sau din dreptul de vot al persoanei juridice ori asupra bunurilor aflate &icirc;n administrare fiduciară (art.3 din Legea cu privire la prevenirea şi combaterea spălării banilor şi finanţării terorismului, nr. 308 din 22.12.2017).</strong></p>
+								<p align="justify" style="margin: 0px;padding: 0px;">Выгодоприобритающий собственник - физическое лицо, которое в конечном счете владеет физическим либо юридическим лицом или контролирует его, либо бенефициар инвестиционного общества или управляющий инвестиционным обществом, либо лицо, от имени которого осуществляется деятельность или сделка и/или которое обладает прямо или косвенно правом собственности или контроля в отношении не менее 25 процентов акций или прав голоса юридического лица или в отношении имущества, находящегося в доверительном управлении (Ст.З., Закон о предупреждении и борьбе с отмыванием денег и финансированием терроризма № 308 от 22.12.2017).</p>
+							</td></tr>
+							</table>
+							</td>
+                            </tr>
+                            </tbody>
+                            </table>',
+                now(), 'Bpay identification form', 'rom', now(), 'argo', 'bpay_identification_form', 'letter');
+            ]]>
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

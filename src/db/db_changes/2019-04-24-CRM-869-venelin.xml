@@ -1,0 +1,19 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="2019-04-24-CRM-869-add-collection-comnpany-name" author="venelin">
+	
+		<preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="repayments" columnName="collection_company_name"/>
+            </not>
+        </preConditions>
+        <sql>
+            ALTER TABLE repayments ADD COLUMN collection_company_name VARCHAR(255) NULL;
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

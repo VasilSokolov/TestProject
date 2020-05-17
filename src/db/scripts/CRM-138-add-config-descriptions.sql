@@ -1,0 +1,34 @@
+UPDATE country_configuration SET description = 'Prevents loanApp.ref_nr to be sent to mintos as loan->lender_id' WHERE property = 'loan.lender_id';
+UPDATE country_configuration SET description = 'Prevents system current country code to be sent to loan->mintos as country' WHERE property = 'loan.country';
+UPDATE country_configuration SET description = 'Prevents loanApp.paid_out_date to be sent to mintos as loan->lender_issue_date' WHERE property = 'loan.lender_issue_date';
+UPDATE country_configuration SET description = 'Prevents current_date to be sent to mintos as loan->mintos_issue_date' WHERE property = 'loan.mintos_issue_date';
+UPDATE country_configuration SET description = 'Prevents loanApp.lastInstallment.expectedDate to be sent to mintos as loan->final_payment_date' WHERE property = 'loan.final_payment_date';
+UPDATE country_configuration SET description = 'Prevents loanApp.amount(in EUR) to be sent to mintos as loan->loan_amount' WHERE property = 'loan.loan_amount';
+UPDATE country_configuration SET description = 'Prevents loanApp.amount(in EUR) to be sent to mintos as loan->loan_amount_assigned_to_mintos' WHERE property = 'loan.loan_amount_assigned_to_mintos';
+UPDATE country_configuration SET description = 'Prevents mintosPortfolio.interestRate to be sent to mintos as loan->interest_rate_percent' WHERE property = 'loan.interest_rate_percent';
+UPDATE country_configuration SET description = 'Prevents value "1" to be sent to mintos as loan->buyback' WHERE property = 'loan.buyback';
+UPDATE country_configuration SET description = 'Prevents value "EUR" to be sent to mintos as loan->currency' WHERE property = 'loan.currency';
+UPDATE country_configuration SET description = 'Prevents 1/mintosPortfolio.currencyRate to be sent to mintos as loan->currency_exchange_rate' WHERE property = 'loan.currency_exchange_rate';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.id to be sent to mintos as client->id' WHERE property = 'client.id';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.pin to be sent to mintos as client->personal_identification' WHERE property = 'client.personal_identification';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.firstName " " loanApp.clientProfile.patronymic to be sent to mintos as client->name' WHERE property = 'client.name';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.lastName to be sent to mintos as client->surname' WHERE property = 'client.surname';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.gender("m":"f") to be sent to mintos as client->gender' WHERE property = 'client.gender';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.birthDate to be sent to mintos as client->birth_date' WHERE property = 'client.birth_date';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.age to be sent to mintos client->age' WHERE property = 'client.age';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.gsm to be sent to mintos as client->phone_number' WHERE property = 'client.phone_number';
+UPDATE country_configuration SET description = 'Prevents loanApp.clientProfile.address(all not null address parts joined) to be sent to mintos as client->address_street_actual' WHERE property = 'client.address_street_actual';
+UPDATE country_configuration SET description = 'Prevents "" to be sent to mintos as client->email' WHERE property = 'client.email';
+UPDATE country_configuration SET description = 'Prevents "unsecured" to be sent to mintos as pledge.type' WHERE property = 'pledge.type';
+UPDATE country_configuration SET description = 'Makes loan application process to compare  client phone (last 7 numbers) number with phone number in new application.<br/>
+                                               If numbers match then loanApp is sent to Automatic check and score.<br/>
+                                               If they do not match then it is sent to manual check and score.' WHERE property = 'comparePreviousPhoneNumber';
+UPDATE country_configuration SET description = 'Activates "posta" functionality in CRM' WHERE property = 'posta';
+UPDATE country_configuration SET description = 'Activates "western_union" functionality in CRM' WHERE property = 'western_union';
+UPDATE country_configuration SET description = 'Prevents loanApp.amount(in Eur) to be sent to mintos as apr_calculation_data.net_issued_amount' WHERE property = 'apr_calculation_data.net_issued_amount';
+UPDATE country_configuration SET description = 'Prevents loanApp.installment.expectedDate and loanApp.installment.primaryAmount to be sent to mintos as apr_calculation_data.actual_payment_schedule' WHERE property = 'apr_calculation_data.actual_payment_schedule';
+UPDATE country_configuration SET description = 'Prevents loanApp.paidOutDate to be sent to mintos as apr_calculation_data.first_agreement_date' WHERE property = 'apr_calculation_data.first_agreement_date';
+UPDATE country_configuration SET description = 'Adds SOFT_REMINDER_CALL to user roles. Whoever has this role will also get Reminder call tasks.' WHERE property = 'enableSoftReminderCall';
+UPDATE country_configuration SET description = 'Enable to configure if WebIntegration /integration/web/balance returns amount values with comma or not. Ie 100,00 or 10000' WHERE property = 'response_without_commas';
+UPDATE country_configuration SET description = 'Defines days during when full principal repayment is used as refund repayment' WHERE property = 'auto_refund_during_days';
+UPDATE country_configuration SET description = 'Enabled/disables auto refund functionality' WHERE property = 'auto_refund_enabled';

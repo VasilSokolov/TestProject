@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-08-28:newOverdueSettingsForMoldova" author="risto" context="moldova">
+        <sql>
+            INSERT INTO public.overdue_process_settings VALUES (7, '2019-08-28 16:00:00', '2019-08-28 16:00:00', 'risto', 17, '2019-09-03 00:00:00', 4, 1.0, 180, 50.00, 50.00, 0.00, 65, 60, 'PRINCIPAL');
+            INSERT INTO public.overdue_action VALUES (81, '', 0.00, NULL, '1st reminder SMS', 'sms', '2019-08-28 16:00:00', 117, 118, 2, 2, true, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (82, '', 0.00, NULL, '2nd reminder SMS', 'sms', '2019-08-28 16:00:00', 119, 120, 11, 6, true, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (83, '', 0.00, NULL, '3rd reminder SMS', 'sms', '2019-08-28 16:00:00', 121, 122, 21, 15, true, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (84, '', 0.00, NULL, '4th reminder SMS', 'sms', '2019-08-28 16:00:00', 123, 124, 31, 21, false, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (85, '', 0.00, NULL, 'First reminder call', 'call', '2019-08-28 16:00:00', NULL, NULL, 8, 3, true, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (86, '', 0.00, NULL, 'Second reminder call', 'call', '2019-08-28 16:00:00', NULL, NULL, 17, 12, true, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (87, '', 0.00, NULL, 'Third reminder call', 'call', '2019-08-28 16:00:00', NULL, NULL, 33, 20, false, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (88, '', 200.00, 'fix', '1st reminder letter', 'letter', '2019-08-28 16:00:00', 71, 71, 10, 9, true, false, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (89, '', 200.00, 'fix', '2nd reminder letter', 'letter', '2019-08-28 16:00:00', 72, 72, 20, 18, false, false, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (90, '', 0.00, NULL, 'Valid for debt collection', 'other', '2019-08-28 16:00:00', NULL, NULL, 70, 36, false, false, 7, 60);
+            INSERT INTO public.overdue_action VALUES (91, '', 0.00, NULL, '5th reminder SMS', 'sms', '2019-08-28 16:00:00', 127, 128, 41, 28, false, true, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (92, '', 200.00, 'fix', 'Termination alert', 'letter', '2019-08-28 16:00:00', 73, 73, 30, 24, false, false, 7, NULL);
+            INSERT INTO public.overdue_action VALUES (93, '', 30.00, 'perc', 'Termination notice', 'letter', '2019-08-28 16:00:00', 74, 74, 50, 30, false, false, 7, NULL);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-08-02:addFixDelayInterestForLastOverdueSettings" author="risto" context="moldova">
+        <sql>
+            INSERT INTO public.overdue_delay_interest (id, created, debt_from, debt_to, delay_interest_sum, overdue_settings_id) VALUES (10, '2019-09-02 12:00:00', 50.00, 100.00, 10.00, 7);
+            INSERT INTO public.overdue_delay_interest (id, created, debt_from, debt_to, delay_interest_sum, overdue_settings_id) VALUES (11, '2019-09-02 12:00:00', 100.00, 150.00, 15.00, 7);
+            INSERT INTO public.overdue_delay_interest (id, created, debt_from, debt_to, delay_interest_sum, overdue_settings_id) VALUES (12, '2019-09-02 12:00:00', 150.00, NULL, 20.00, 7);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,143 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="2019-07-09:CRM-1760-add-basic-dealer-product" author="argo" context="albania">
+        <sql>
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, max_apr, max_interest, max_loan_period, max_principal, min_apr,
+            min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular,
+            salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product,
+            paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold,
+            salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office,
+            turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, apr_threshold_evening, apr_threshold_evening_guarantee,
+            guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory,
+            initial_restructured_contribution, age_max_inclusive, age_min_inclusive, age_min_risky_inclusive, age_max_risky_inclusive) VALUES
+            (14, 42, null, 144.79, 17, 18, 140000, 73.2, 0, 1, 5000, 'Basic Dealer', true, true, false, 500, 'regular', 35, 50, 35, null, 0.25, 999, false, 4,
+            0, 17, 1, 0, 50000.1, 4, 0, 4, 0, true, 1, false, 0, null, null, 200, null, false, false, true, 0, 70, 18,
+            18, 70);
+
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration,
+            check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type,
+            upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration,
+            check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration,
+            deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out)
+            VALUES (15, null, null, 45, 10, 15, 15, 60, null, 'general', 15, false, 14, null, null, null, null, null, null, null, null, null, 10);
+
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (7.88, 7.88, 17, 17, null, null, 1, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.88, 10.88, 17, 17, null, null, 2, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (14.25, 14.25, 17, 17, null, null, 3, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (16.5, 16.5, 17, 17, null, null, 4, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (18.75, 18.75, 17, 17, null, null, 5, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (20.4, 20.4, 17, 17, null, null, 6, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (21.38, 21.38, 17, 17, null, null, 7, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (22.5, 22.5, 17, 17, null, null, 8, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (25.13, 2.13, 17, 17, null, null, 9, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (30.75, 30.75, 8.5, 8.5, null, null, 10, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (30.75, 30.75, 17, 17, null, null, 11, 14, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from,
+            loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (31.5, 31.5, 17, 17, null, null, 12, 14, null);
+
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 31);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 2);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 24);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 25);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 26);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 27);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 45);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 28);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 15);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 53);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 30);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 21);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 22);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 16);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 78);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 79);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 80);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 81);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 82);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 83);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 84);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 85);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 86);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 87);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 67);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 68);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 69);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 70);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 71);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 72);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 73);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 74);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 75);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 76);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 77);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 88);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 54);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 55);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 56);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 57);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 58);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 59);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 60);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 61);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 62);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 63);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 64);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 65);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 66);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 89);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 90);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 91);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 92);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 93);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 94);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 95);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 96);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 97);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 98);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 99);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 100);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 101);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 102);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 103);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 104);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 105);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 106);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 107);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 108);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 109);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 110);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 111);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 112);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 113);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 114);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 6);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 17);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 18);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 19);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 3);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 4);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 5);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 20);
+            INSERT INTO public.doc_template_loan_product (loan_product_id, template_id) VALUES (14, 23);
+        </sql>
+    </changeSet>
+    <changeSet id="2019-07-10:CRM-1760-remove-sort-order-and-pm-default" author="argo" context="albania">
+        <sql>
+            UPDATE loan_products SET sort_order = null, pm_default = false WHERE id = 14;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

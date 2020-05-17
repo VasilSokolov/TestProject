@@ -1,0 +1,23 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="2019-06-07-CRM-1546-vasil-1" author="vasil">
+		<insert tableName="country_configuration">
+			<column name="property_group" value="general"></column>
+			<column name="property"
+				value="ceoName"></column>
+			<column name="description"
+				value="CEO First name and Last name"></column>
+		</insert>
+	
+	</changeSet>
+	<changeSet id="2019-06-07-CRM-1546-vasil-2" author="vasil">
+		<sql>
+			insert into property(country_config_id, type, string_value) values ((select
+			id from country_configuration where
+			property='ceoName'), 'string', '');
+		</sql>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,833 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2019-03-21:add-bosnia-country-configuration" author="argo" context="bosnia">
+        <sql>
+
+            TRUNCATE country_configuration, property RESTART IDENTITY;
+
+            <![CDATA[
+                INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (40, 'automatic_external_collection', 'restructure', 'Whether restructured loans are sent to external collection automatically or not.<br/>NB! make sure to choose at least on collection company for automatic collection from<br/>Tools->Collection->Collection Settings->Edit collection company');
+                INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (1, 'comparePreviousPhoneNumber', 'comfort', 'Makes loan application process to compare  client phone (last 7 numbers) number with phone number in new application.<br/>If numbers match then loanApp is sent to Automatic check and score.<br/>If they do not match then it is sent to manual check and score.');
+            ]]>
+
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (33, 'double_check_documents', 'dealer', 'Should accountant also check documents (double check since print center already does aswell)');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (4, 'loan.lender_id', 'mintos', 'Prevents loanApp.ref_nr to be sent to mintos as loan->lender_id');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (5, 'loan.country', 'mintos', 'Prevents system current country code to be sent to loan->mintos as country');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (6, 'loan.lender_issue_date', 'mintos', 'Prevents loanApp.paid_out_date to be sent to mintos as loan->lender_issue_date');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (7, 'loan.mintos_issue_date', 'mintos', 'Prevents current_date to be sent to mintos as loan->mintos_issue_date');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (8, 'loan.final_payment_date', 'mintos', 'Prevents loanApp.lastInstallment.expectedDate to be sent to mintos as loan->final_payment_date');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (9, 'loan.loan_amount', 'mintos', 'Prevents loanApp.amount(in EUR) to be sent to mintos as loan->loan_amount');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (10, 'loan.loan_amount_assigned_to_mintos', 'mintos', 'Prevents loanApp.amount(in EUR) to be sent to mintos as loan->loan_amount_assigned_to_mintos');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (11, 'loan.interest_rate_percent', 'mintos', 'Prevents mintosPortfolio.interestRate to be sent to mintos as loan->interest_rate_percent');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (12, 'loan.buyback', 'mintos', 'Prevents value "1" to be sent to mintos as loan->buyback');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (13, 'loan.currency', 'mintos', 'Prevents value "EUR" to be sent to mintos as loan->currency');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (14, 'loan.currency_exchange_rate', 'mintos', 'Prevents 1/mintosPortfolio.currencyRate to be sent to mintos as loan->currency_exchange_rate');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (15, 'client.id', 'mintos', 'Prevents loanApp.clientProfile.id to be sent to mintos as client->id');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (16, 'client.personal_identification', 'mintos', 'Prevents loanApp.clientProfile.pin to be sent to mintos as client->personal_identification');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (17, 'client.name', 'mintos', 'Prevents loanApp.clientProfile.firstName " " loanApp.clientProfile.patronymic to be sent to mintos as client->name');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (18, 'client.surname', 'mintos', 'Prevents loanApp.clientProfile.lastName to be sent to mintos as client->surname');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (19, 'client.gender', 'mintos', 'Prevents loanApp.clientProfile.gender("m":"f") to be sent to mintos as client->gender');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (20, 'client.birth_date', 'mintos', 'Prevents loanApp.clientProfile.birthDate to be sent to mintos as client->birth_date');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (21, 'client.age', 'mintos', 'Prevents loanApp.clientProfile.age to be sent to mintos client->age');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (22, 'client.phone_number', 'mintos', 'Prevents loanApp.clientProfile.gsm to be sent to mintos as client->phone_number');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (23, 'client.address_street_actual', 'mintos', 'Prevents loanApp.clientProfile.address(all not null address parts joined) to be sent to mintos as client->address_street_actual');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (24, 'client.email', 'mintos', 'Prevents "" to be sent to mintos as client->email');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (25, 'pledge.type', 'mintos', 'Prevents "unsecured" to be sent to mintos as pledge.type');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (2, 'posta', 'partner', 'Activates "posta" functionality in CRM');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (3, 'western_union', 'partner', 'Activates "western_union" functionality in CRM');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (26, 'apr_calculation_data.net_issued_amount', 'mintos', 'Prevents loanApp.amount(in Eur) to be sent to mintos as apr_calculation_data.net_issued_amount');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (27, 'apr_calculation_data.actual_payment_schedule', 'mintos', 'Prevents loanApp.installment.expectedDate and loanApp.installment.primaryAmount to be sent to mintos as apr_calculation_data.actual_payment_schedule');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (28, 'apr_calculation_data.first_agreement_date', 'mintos', 'Prevents loanApp.paidOutDate to be sent to mintos as apr_calculation_data.first_agreement_date');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (29, 'enableSoftReminderCall', 'user', 'Adds SOFT_REMINDER_CALL to user roles. Whoever has this role will also get Reminder call tasks.');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (30, 'response_without_commas', 'web-integration', 'Enable to configure if WebIntegration /integration/web/balance returns amount values with comma or not. Ie 100,00 or 10000');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (32, 'auto_refund_during_days', 'auto_refund', 'Defines days during when full principal repayment is used as refund repayment');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (31, 'auto_refund_enabled', 'auto_refund', 'Enabled/disables auto refund functionality');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (34, 'easy_pay', 'partner', 'Activates ''easy_pay'' functionality in CRM');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (35, 'language.eng', 'customer_config', 'Enables translations for english language');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (36, 'language.rus', 'customer_config', 'Enables translations for russian language');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (37, 'language.sqi', 'customer_config', 'Enables translations for albanian language');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (38, 'language.mkd', 'customer_config', 'Enables translations for macedonian language');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (39, 'language.ron', 'customer_config', 'Enables translations for romanian language');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (41, 'data_consent_mandatory_web_integration', 'files', 'Whether data consent(Data Verification) file is mandatory for loan applications where source is ''web''');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (42, 'age_limit', 'client', 'Age limit for pensioners');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (43, 'automatic_rejection_notification', 'client', 'Notify client when loan is rejected');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (44, 'disable_office_rejection_notification', 'client', 'Disable rejection notifications if client is in the office');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (45, 'minAmountForBonus', 'user', 'The amount of required repayment to issue a bonus after an effective reminder call');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (46, 'dealerInterfaceRequiresDocs', 'dealer', 'Dealer interface requires documents');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (47, 'loanAppRequiresIdCopyAndDataVerification', 'dealer', 'Add dealer loan requires id copy and data verification');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (48, 'returnMaxPrincipal6000ForUnofficialEmployedNoConfirm', 'dealer', 'Return max principal 600 for unofficial employed no confirmation');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (49, 'useHomeAddressInDealerLoan', 'dealer', 'Use home address in dealer loan');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (50, 'setAlternativeContactOtherRelative', 'dealer', 'Set alternative contact other relative');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (51, 'validateEmployerRegCode', 'client', 'Validate employer reg code');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (52, 'validatePhoneNumbers', 'client', 'Validate phone numbers (except gsm)');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (53, 'enablePayOutToPostaOtherwiseToBank', 'web-integration', 'Enable pay out to posta otherwise to bank');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (54, 'enableLastValidLoanAppNotBasic', 'next-offer', 'Enable last valid loan app is not Basic or Basic Entry');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (55, 'checkComfortTurnoverForNextOffer', 'next-offer', 'Check comfort turnover for next offer');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (56, 'checkAttachableSignedAgreementExists', 'files', 'Check if signed agreement already exists');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (57, 'enableDataVerification', 'files', 'Enable data verification check');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (58, 'addBankStatementEnabled', 'files', 'Enable add bank statement');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (59, 'enableGeneralConditions', 'files', 'Enable general conditions');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (60, 'enableAddBrandedCards', 'files', 'Enable add branded cards');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (61, 'enableIsShowBankStatement', 'files', 'Enable show bank statement');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (62, 'enableCollectionDateFilterForInternalCollectionCompany', 'reports', 'Enable collection date filter for specific internal collection companies');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (63, 'use360DaysInProvisionReportOtherwise365', 'reports', 'Use 360 days in provision report otherwise 365');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (64, 'getSpecialPortfolioReportOverview', 'reports', 'Get special portfolio overview');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (65, 'getMoldovaSpecificCoefsForProvisionReport', 'reports', 'Get moldova specific coefs for provision report');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (66, 'validateCarRegNr', 'car', 'Validate car reg nr');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (67, 'validateCarRegDocNrAs9Or10Chars', 'car', 'Validate car reg doc nr as 9 or 10 characters');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (68, 'validateCarColor', 'car', 'Validate car color');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (69, 'showInfodebitErrors', 'loan_app', 'Show infodebit errors');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (70, 'validateLoanAppCarRegDocNr', 'loan_app', 'Validate loan app car reg doc nr');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (71, 'validateLoanAppCarRegNr', 'loan_app', 'Validate loan app car reg nr');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (72, 'enablePostaEmployeesCantGetFidelBiggerThan1000', 'loan_app', 'Enable posta employees cant get fidel bigger than 1000');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (73, 'enableAgreementSignedBeforeFaRelease', 'loan_app', 'Enable agreement signed before fa release');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (74, 'markAsCashReleaseAllowed', 'loan_app', 'If agreement for posta submitted loan is uploaded by Iute employee, then mark loan as cash release allowed');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (75, 'enableRequiredDocumentsCheck', 'loan_app', 'Enable required documents check');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (76, 'enableUpdateAgriculturalAssests', 'loan_app', 'Enable upate agricultural assets');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (77, 'enablePreactivationOfSubmittedLoans', 'loan_app', 'Enable preactivation of submitted loans');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (78, 'confirmCashReleaseAllowed', 'loan_app', 'Allow cash release confirmation');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (79, 'setFirstPaymentDateOtherwise1stOfMonth', 'loan_app', 'Set payment date otherwise 1st of month');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (80, 'savePrintLoanAgreementRow', 'loan_app', 'Save print loan agreement row');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (81, 'getPaidMonths1ForNotDealerLoans', 'loan_app', 'Get paid months 1 for not dealer loans');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (82, 'isAuthoriseCashReleaseRequired', 'loan_app', 'Is authorise cash release required');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (83, 'getRejectionIncasoDebtOtherwiseBadPerf', 'loan_app', 'Get rejection incaso debt otherwise bad perf');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (84, 'getActiveLoanLimit2Otherwise1', 'loan_app', 'Get active loan limit 2 otherwise 1');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (85, 'enableFileChecksForComfort', 'comfort', 'Enable file checks for comfort');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (86, 'allowComfortSmsSigningWithoutFa', 'comfort', 'Allow comfort sms signing without FA');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (87, 'isSpecialAgentEnabled', 'user', 'Enable special agent role');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (88, 'enableWorkingMenAndCallCenterOtherwiseAll', 'user', 'Enable working men and call center otherwise all');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (89, 'thirdAndFourthCallToMen', 'user', 'Assign third and fourth rem call to men');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (90, 'usePayOutAccountantInsteadOfUsual', 'user', 'Use pay put accountant instead of usual');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (91, 'showTotalsInInstallmentTable', 'installment', 'Show totals in installment table');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (92, 'validateCarRegDocNr', 'car', 'Validate car reg doc nr');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (93, 'enableAutoApprove', 'loan_app', 'Enable auto approve');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (94, 'setPayOutToPostaAndPartnerOfficeType', 'loan_app', 'Set pay out to posta and partner office type');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (95, 'showEmployerEstablishedField', 'client', 'Show employer established');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (96, 'showEmployerDirectors', 'client', 'Show employer directors');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (97, 'showAgriculturalIncome', 'client', 'Show agricultural income');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (98, 'showAgriculturalAssets', 'client', 'Show agricultural assets');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (99, 'showPrecontractUrl', 'dealer', 'Show precontract url');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (101, 'showOtherTotalDebtField', 'client', 'Show other total debt field');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (102, 'searchActiveIncomeCallEnabled', 'general', 'Search active income call enabled');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (103, 'clientHomeTownAutocompleteEnabled', 'client', 'Client hometown autocomplete enabled');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (104, 'isCarSectionReadOnly', 'car', 'Enable car section read only');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (105, 'english', 'client_language', 'English');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (106, 'albanian', 'client_language', 'Albanian');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (107, 'romanian', 'client_language', 'Romanian');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (108, 'russian', 'client_language', 'Russian');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (109, 'macedonian', 'client_language', 'Macedonian');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (110, 'serbian', 'client_language', 'Serbian');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (111, 'returnMaxPrincipal30000ForBasicEntryWithBoaHistory', 'loan_product', 'Return max principal 30000 for Basic Entry with BoA history');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (112, 'showCrkHistory', 'client', 'Show "CRK history" option on client profile and loan app');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (113, 'albanian_kosovo', 'client_language', 'Albanian (Kosovo)');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (114, 'validatePartnerOffice', 'partner', 'Validate partner office');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (115, 'isShouldNotCheckFinancialFiles', 'loan_app', 'Is should not check financial files');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (116, 'enableFinancialFilesUploadForPartners', 'partner', 'Enable financial files upload for partners');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (117, 'getKosovoSpecificCoefsForProvisionReport', 'reports', 'Get kosovo specific coefs for provision report');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (118, 'enableMaritalStatusesMarriedDivorcedNotMarried', 'general', 'Enable marital statuses MARRIED DIVORCED NOT_MARRIED');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (119, 'showBirthPlace', 'loan_app', 'Show birth place');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (120, 'useDataVerificationV1', 'dealer', 'Use data verification file v1');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (121, 'showExportPayments', 'general', 'Show export payments');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (122, 'showCurrencyRisk', 'general', 'Show currency risk');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (123, 'isShouldNotCheckOtherFiles', 'loan_app', 'Is should not check other files');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (124, 'enableFileUploadForPartners', 'partner', 'Enable file upload for partners');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (125, 'enableDocSerialHomePhoneAltContactForPartners', 'partner', 'Enable doc serial home phone alt contact for partners');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (126, 'usePatronymic', 'dealer', 'Use patronymic');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (128, 'useAlbanianClosureCert', 'files', 'Use albanian closure certificate');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (129, 'showIuteSumPercentFromCollectionCompanySum', 'repayment', 'Show Iute percent from collection company sum');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (130, 'showSmsBalanceLimitAndTaskUser', 'general', 'Show sms balance limit and task user');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (131, 'showNaceReport', 'reports', 'Show nace report');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (132, 'showNewCollectionsReport', 'reports', 'Show new collections report');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (133, 'showBankStatementFilterInCpi', 'reports', 'Show bank statement filter in cpi report');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (134, 'isNewFrameAgreementNeededForCarLoan', 'car', 'Is new frame agreement needed for car loan');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (135, 'showMonthlyLabelInInstallmentTable', 'installment', 'Show monthly label in installment table');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (136, 'onlineSigningEnabled', 'online-signing', 'Enable online signing functionality for dealer, e-shop and online partners');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (137, 'onlineSigningCodeSubmissionURL', 'online-signing', 'Online signing URL where client needs to enter code that was sent with SMS');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (138, 'useMacedonianClosureCert', 'files', 'Use albanian closure certificate');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (139, 'useDataVerificationV4', 'dealer', 'Use albanian closure certificate');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (140, 'useEmail', 'dealer', 'Use email');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (141, 'showMkbReportInNavigation', 'reports', 'Show mkb report in navigation');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (142, 'setPurposeCarExpenses', 'loan_app', 'Set purpose car expenses');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (143, 'setUtf8Encoding', 'general', 'Set UTF-8 encoding');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (144, 'validateEmail', 'loan_app', 'Validate email');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (145, 'enableKibsValidation', 'loan_app', 'Enable KIBS validation');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (146, 'alwaysShowBankStatement', 'files', 'Always show bank statement');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (147, 'setAgreementSignmentOnlineOtherwiseOffice', 'loan_app', 'Set agreement signment online otherwise office');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (148, 'setAgreementSignmentOnlineOtherwiseSms', 'loan_app', 'Set agreement signment online otherwise sms');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (149, 'setSigningCodeExpiredOnWithdrawal', 'loan_app', 'Set signing code expired on withdrawal');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (150, 'sendRejectedEmail', 'loan_app', 'Send rejected email');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (151, 'setAgreementSignmentOfficeAndLoanPurposeCarExpenses', 'dealer', 'Set agreement signment office and loan purpose car expenses');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (127, 'hideAprInCarDealerView', 'dealer', 'Hide apr in car dealer view');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (154, 'hideAprInCashLoansView', 'dealer', 'Hide apr in cash loans view');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (155, 'hideAprInDealerView', 'dealer', 'Hide apr in dealer view');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (156, 'showCrkReportInNavigation', 'reports', 'Show crk report in navigation');
+            INSERT INTO public.country_configuration (id, property, property_group, description) VALUES (157, 'showBoaReportInNavigation', 'reports', 'Show boa report in navigation');
+
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (2, 2, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (29, 29, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (30, 30, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (32, 32, 'long', null, 14, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (1, 1, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (34, 34, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (33, 33, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (35, 35, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (36, 36, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (37, 37, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (38, 38, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (39, 39, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (40, 40, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (41, 41, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (42, 42, 'long', null, 69, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (28, 28, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (27, 27, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (26, 26, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (25, 25, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (24, 24, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (23, 23, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (22, 22, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (21, 21, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (20, 20, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (19, 19, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (18, 18, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (17, 17, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (16, 16, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (15, 15, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (14, 14, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (13, 13, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (12, 12, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (11, 11, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (10, 10, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (9, 9, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (8, 8, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (7, 7, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (6, 6, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (5, 5, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (4, 4, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (31, 31, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (43, 43, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (44, 44, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (3, 3, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (45, 45, 'long', false, 2, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (46, 46, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (48, 48, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (49, 49, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (50, 50, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (51, 51, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (52, 52, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (53, 53, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (54, 54, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (55, 55, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (56, 56, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (57, 57, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (58, 58, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (59, 59, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (60, 60, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (62, 62, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (63, 63, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (64, 64, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (65, 65, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (66, 66, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (67, 67, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (68, 68, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (69, 69, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (70, 70, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (71, 71, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (72, 72, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (73, 73, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (74, 74, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (75, 75, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (77, 77, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (78, 78, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (79, 79, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (80, 80, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (81, 81, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (82, 82, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (83, 83, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (84, 84, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (85, 85, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (86, 86, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (87, 87, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (88, 88, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (89, 89, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (90, 90, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (91, 91, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (92, 92, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (93, 93, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (94, 94, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (95, 95, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (96, 96, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (97, 97, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (98, 98, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (99, 99, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (100, 100, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (101, 101, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (102, 102, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (103, 103, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (104, 104, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (47, 47, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (105, 105, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (106, 106, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (107, 107, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (108, 108, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (109, 109, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (110, 110, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (111, 111, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (76, 76, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (61, 61, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (112, 112, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (113, 113, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (114, 114, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (115, 115, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (116, 116, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (117, 117, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (118, 118, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (119, 119, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (120, 120, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (121, 121, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (122, 122, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (123, 123, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (124, 124, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (125, 125, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (126, 126, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (127, 127, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (128, 128, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (129, 129, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (130, 130, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (131, 131, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (132, 132, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (133, 133, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (134, 134, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (135, 135, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (136, 136, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (137, 137, 'string', null, null, '');
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (138, 138, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (139, 139, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (140, 140, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (141, 141, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (142, 142, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (143, 143, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (144, 144, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (145, 145, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (146, 146, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (147, 147, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (148, 148, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (149, 149, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (150, 150, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (151, 151, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (152, 152, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (153, 153, 'boolean', false, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (154, 154, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (155, 155, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (156, 156, 'boolean', true, null, null);
+            INSERT INTO public.property (id, country_config_id, type, boolean_value, long_value, string_value) VALUES (157, 157, 'boolean', false, null, null);
+
+            BEGIN;
+            -- protect against concurrent inserts while you update the counter
+            LOCK TABLE country_configuration IN EXCLUSIVE MODE;
+            -- Update the sequence
+            SELECT setval('country_configuration_id_seq', COALESCE((SELECT MAX(id)+1 FROM country_configuration), 1), false);
+            COMMIT;
+
+            BEGIN;
+            -- protect against concurrent inserts while you update the counter
+            LOCK TABLE property IN EXCLUSIVE MODE;
+            -- Update the sequence
+            SELECT setval('property_id_seq', COALESCE((SELECT MAX(id)+1 FROM property), 1), false);
+            COMMIT;
+
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (100, 0, 90, 90, 145, 0, 1, 300, 0, 0, 1, 50, 'FFF (First For Free)', false, true, false, 500, 'regular', 40, 40, 40, 90, 90, 0.4, null, false, 4, 0, 17, 4, 0, null, 4, 0, 5, 0, true, null, false, 0, null, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (1, 39, 90, 90, 500, 15, 8, 500, 62, 0, 1, 100, 'Basic', true, true, false, 500, 'regular', 33.5, 40, 33.5, 90, 90, 0.4, null, true, 4, 0, 17, 4, 0, null, 4, 0, 4, 0, true, 3, false, 0, null, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (104, 20, null, null, 150, 15, 18, 210000, 36.5, 0, 1, 10000, 'Car Dealer (New Owner)', false, true, false, 500, 'dealer', 33.4, 33.4, 33.4, null, null, null, null, false, 3, 0, 17, 3, 0, 100000.01, 5, 0, 5, 0, false, null, true, 100, null, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (3, 35, 75, 75, 200, 15, 12, 1000, 59, 0, 1, 100, 'Fidel', false, true, false, 500, 'regular', 40, 50, 33.5, 75, 75, 0.4, null, true, 5, 0, 17, 4, 0, 50000.1, 4, 0, 4, 0, true, 4, false, 0, null, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (21, 15.9, null, null, 500, 0, 2, 200, 79, 0, 1, 50, 'Comfort', false, false, false, null, 'comfort', 60, 60, 50, null, null, null, null, false, null, 0, 17, null, 0, null, null, 0, null, 0, true, 5, false, null, null, null, false, true, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (2, 35, null, null, 200, 15, 12, 1200, 58, 0, 1, 100, 'Dealer', false, true, false, 500, 'dealer', 40, 50, 33.5, null, null, null, null, false, 4, 0, 17, 3, 0, 0, 4, 0, 4, 0, true, 6, false, 0, null, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (102, 34, null, null, 350, 0, 60, 10000, 45, 0, 1, 500, 'Car (Pledge)', false, true, false, 500, 'regular', 33.4, 40, 33.4, null, null, 0.25, 999, true, 4, 0, 17, 4, 0, 50000.1, 4, 0, 4, 0, true, null, true, 100, 200, null, false, false, true, 0);
+            INSERT INTO public.loan_products (id, admission_fee_perc, apr_threshold, apr_threshold_evening, max_apr, max_interest, max_loan_period, max_principal, min_apr, min_interest, min_loan_period, min_principal, name, pm_default, req_id_copy, req_salary_cert, suspension_fee, type, salary_ratio_regular, salary_ratio_second_active, salary_ratio_unofficial, apr_threshold_evening_guarantee, apr_threshold_guarantee, guarantee_fee_perc, guarantee_max_period, guarantee_product, paid_inst_records_threshold, turnover_threshold, max_suspended_days, official_paid_inst_records_threshold, official_turnover_threshold, salary_cert_limit, official_paid_inst_records_threshold_office, official_turnover_threshold_office, paid_inst_records_threshold_office, turnover_threshold_office, enabled, sort_order, car_loan, max_car_value_perc, guarantee_monthly_max, sms_sign_limit, requires_data_verification, requesting_fix_amount_by_sms_mandatory, checking_links_mandatory, initial_restructured_contribution) VALUES (103, 34, null, null, 350, 0, 54, 10000, 90, 0, 1, 500, 'Car (New Owner)', false, true, false, 500, 'regular', 40, 40, 40, null, null, 0.25, 999, true, 4, 0, 17, 4, 0, 50000.1, 4, 0, 4, 0, true, null, true, 100, 200, null, false, false, true, 0);
+
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (null, null, 1, null, null, null, null, null, null, 'dealer', null, false, 3, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (null, 240, null, 30, 30, 15, 15, 10080, null, 'general', null, false, 2, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (null, 60, null, 20, 15, 5, 5, 10080, null, 'vip', null, true, 2, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (30, null, null, 45, 60, 15, 15, 60, null, 'general', 15, false, 1, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (30, null, null, 45, 60, 15, 15, 60, null, 'general', 15, false, 3, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (30, null, null, 45, 60, 15, 15, 60, null, 'general', 15, false, 100, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (30, null, null, 45, 30, 15, 15, 60, null, 'general', 15, false, 102, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (30, null, null, 45, 30, 15, 15, 60, null, 'general', 15, false, 103, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (null, 1440, null, 30, 30, 15, 15, 10080, null, 'general', null, false, 104, null, null, null, null, null, null, null, null, null, 30);
+            INSERT INTO public.loan_product_settings (allow_cash_release_duration, check_docs_duration, dealer_id, checking_duration, check_score_duration, scoring_duration, notify_client_duration, pay_out_duration, send_precontract_duration, type, upload_agreement_duration, vip, loan_product_id, check_official_duration, check_official_short_duration, check_unofficial_altcontact_duration, check_unofficial_employer_duration, check_unofficial_person_duration, check_balance_duration, deposit_money_duration, issue_card_duration, issue_pin_duration, bonus_task_duration_until_paid_out) VALUES (null, 720, null, 20, 15, 5, 5, 10080, null, 'vip', null, true, 104, null, null, null, null, null, null, null, null, null, 30);
+
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (0, 0, 0, 0, 50, 300, 1, 100, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (5.25, 5.25, 0, 0, null, null, 1, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (7.9, 7.9, 0, 0, null, null, 2, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES ( 10.6, 10.6, 0, 0, null, null, 3, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (13.3, 13.3, 0, 0, null, null, 4, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (16, 16, 0, 0, null, null, 5, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (18.8, 18.8, 0, 0, null, null, 6, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (21.5, 21.5, 0, 0, null, null, 7, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (24, 24, 0, 0, null, null, 8, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 1, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 2, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 3, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 4, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 5, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 6, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 7, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 8, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 9, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 10, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 11, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (null, null, null, null, null, null, 12, 2, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (92, 92, null, null, null, null, 39, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (103, 103, null, null, null, null, 43, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (5.25, 5.25, 0, 0, null, null, 1, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (7.94, 7.94, 0, 0, null, null, 2, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.67, 10.67, 0, 0, null, null, 3, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (13.44, 13.44, 0, 0, null, null, 4, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (16.25, 16.25, 0, 0, null, null, 5, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (19.1, 19.1, 0, 0, null, null, 6, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (22, 22, 0, 0, null, null, 7, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (24.9, 24.9, 0, 0, null, null, 8, 1, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (6.69, 6.69, 0, 0, null, null, 1, 21, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.09, 10.09, 0, 0, null, null, 2, 21, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.75, 2.75, null, null, null, null, 1, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (18.7, 18.7, null, null, null, null, 9, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (20.8, 20.8, null, null, null, null, 10, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (22.9, 22.9, null, null, null, null, 11, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (25.1, 25.1, null, null, null, null, 12, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (27.2, 27.2, null, null, null, null, 13, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (29.4, 29.4, null, null, null, null, 14, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (31.6, 31.6, null, null, null, null, 15, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (33.8, 33.8, null, null, null, null, 16, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (36.1, 36.1, null, null, null, null, 17, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (38.2, 38.2, null, null, null, null, 18, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (40.7, 40.7, null, null, null, null, 19, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (43, 43, null, null, null, null, 20, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (45.3, 45.3, null, null, null, null, 21, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (47.7, 47.7, null, null, null, null, 22, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (50, 50, null, null, null, null, 23, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (52.5, 52.5, null, null, null, null, 24, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (55, 55, null, null, null, null, 25, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (2.42, 2.42, null, null, null, null, 1, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (3.9, 3.9, null, null, null, null, 2, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (5.4, 5.4, null, null, null, null, 3, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (6.9, 6.9, null, null, null, null, 4, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (8.45, 8.45, null, null, null, null, 5, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10, 10, null, null, null, null, 6, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES ( 11.55, 11.55, null, null, null, null, 7, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (13.1, 13.1, null, null, null, null, 8, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (120, 120, null, null, null, null, 49, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (123, 123, null, null, null, null, 50, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (126, 126, null, null, null, null, 51, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (150, 150, null, null, null, null, 59, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (153, 153, null, null, null, null, 60, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (26.5, 26.5, 0, 0, null, null, 9, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (29.3, 29.3, 0, 0, null, null, 10, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (32, 32, 0, 0, null, null, 11, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (34.8, 34.8, 0, 0, null, null, 12, 3, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (4.67, 4.67, null, null, null, null, 2, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (6.6, 6.6, null, null, null, null, 3, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (8.6, 8.6, null, null, null, null, 4, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (10.6, 10.6, null, null, null, null, 5, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (12.6, 12.6, null, null, null, null, 6, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (14.6, 14.6, null, null, null, null, 7, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (16.6, 16.6, null, null, null, null, 8, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (57.5, 57.5, null, null, null, null, 26, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (59.8, 59.8, null, null, null, null, 27, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (62.3, 62.3, null, null, null, null, 28, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (64.8, 64.8, null, null, null, null, 29, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (67.3, 67.3, null, null, null, null, 30, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (70, 70, null, null, null, null, 31, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (72.5, 72.5, null, null, null, null, 32, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (75, 75, null, null, null, null, 33, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (77.6, 77.6, null, null, null, null, 34, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (80.2, 80.2, null, null, null, null, 35, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (83, 83, null, null, null, null, 36, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (86.6, 86.6, null, null, null, null, 37, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (89.4, 89.4, null, null, null, null, 38, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (94.8, 94.8, null, null, null, null, 40, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (97.5, 97.5, null, null, null, null, 41, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (100.2, 100.2, null, null, null, null, 42, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (105.8, 105.8, null, null, null, null, 44, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (108.4, 108.4, null, null, null, null, 45, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (111.5, 111.5, null, null, null, null, 46, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (114.5, 114.5, null, null, null, null, 47, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (117.2, 117.2, null, null, null, null, 48, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (128.8, 128.8, null, null, null, null, 52, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (131.8, 131.8, null, null, null, null, 53, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (134.8, 134.8, null, null, null, null, 54, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (137.8, 137.8, null, null, null, null, 55, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (140.7, 140.7, null, null, null, null, 56, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (143.7, 143.7, null, null, null, null, 57, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (146.7, 146.7, null, null, null, null, 58, 102, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (14.7, 14.7, null, null, null, null, 9, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (16.3, 16.3, null, null, null, null, 10, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (17.9, 17.9, null, null, null, null, 11, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (19.5, 19.5, null, null, null, null, 12, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (21.1, 21.1, null, null, null, null, 13, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (22.8, 22.8, null, null, null, null, 14, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (24.5, 24.5, null, null, null, null, 15, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (26.1, 26.1, null, null, null, null, 16, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (27.8, 27.8, null, null, null, null, 17, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (29.5, 29.5, null, null, null, null, 18, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (31.3, 31.3, null, null, null, null, 19, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (33, 33, null, null, null, null, 20, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (34.8, 34.8, null, null, null, null, 21, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (36.5, 36.5, null, null, null, null, 22, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (38.2, 38.2, null, null, null, null, 23, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (40, 40, null, null, null, null, 24, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (41.8, 41.8, null, null, null, null, 25, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (43.6, 43.6, null, null, null, null, 26, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (45.5, 45.5, null, null, null, null, 27, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (47.4, 474, null, null, null, null, 28, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (49.1, 49.1, null, null, null, null, 29, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (51, 51, null, null, null, null, 30, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (53, 53, null, null, null, null, 31, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (54.9, 54.9, null, null, null, null, 32, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (68.3, 68.3, null, null, null, null, 39, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (76.3, 76.3, null, null, null, null, 43, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (88.9, 88.9, null, null, null, null, 49, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (90.8, 90.8, null, null, null, null, 50, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (93, 93, null, null, null, null, 51, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (56.8, 56.8, null, null, null, null, 33, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (58.7, 58.7, null, null, null, null, 34, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (60.5, 60.5, null, null, null, null, 35, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (62.6, 62.6, null, null, null, null, 36, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (64.5, 64.5, null, null, null, null, 37, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (66.3, 66.3, null, null, null, null, 38, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (70.3, 70.3, null, null, null, null, 40, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (72.5, 72.5, null, null, null, null, 41, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (74.5, 74.5, null, null, null, null, 42, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (78.5, 78.5, null, null, null, null, 44, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (80.5, 80.5, null, null, null, null, 45, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (82.5, 82.5, null, null, null, null, 46, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (84.5, 84.5, null, null, null, null, 47, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (86.6, 86.6, null, null, null, null, 48, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (95, 95, null, null, null, null, 52, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (97.2, 97.2, null, null, null, null, 53, 103, null);
+            INSERT INTO public.loan_product_condition (commission_perc, commission_perc_cash, interest_perc, interest_perc_cash, loan_amount_from, loan_amount_to, period, loan_product_id, admin_fee_percent) VALUES (99.3, 99.3, null, null, null, null, 54, 103, null);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-03-22:add-bosnian-language" author="argo">
+        <sql>
+            INSERT INTO country_configuration (property, property_group, description) VALUES ('bosnian', 'client_language', 'Bosnian');
+            insert into property (country_config_id, type, boolean_value, long_value)
+            values ((select id from country_configuration where property_group = 'client_language' and property = 'bosnian'), 'boolean', false, null);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-03-22:add-classifiers" author="argo" context="bosnia">
+        <sql>
+            TRUNCATE classifier RESTART IDENTITY;
+
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'internet_ad', false, 'mediasource', 'Internet advertisement', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'street_ad', false, 'mediasource', 'Street advertisement', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'tv_ad', false, 'mediasource', 'TV advertisement', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'acquintant', false, 'mediasource', 'Acquintant suggested', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'newspaper_ad', false, 'mediasource', 'Newspaper advertisement', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'transport_ad', false, 'mediasource', 'Transport advertisement', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'aftersale', true, 'mediasource', 'Aftersale call', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'radio', false, 'mediasource', 'Radio', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'leaflets', false, 'mediasource', 'Leaflets', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'shop', false, 'mediasource', 'Shop', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'social_media', false, 'mediasource', 'Social media', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'pm_ad', false, 'mediasource', 'PM advertisement', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'sms_ad', false, 'mediasource', 'SMS advertisement', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'not_available', false, 'rejectionReasons', 'Not available', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'service_slow', false, 'rejectionReasons', 'Service is too slow', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'loan_from_other', false, 'rejectionReasons', 'Took loan in other financial institution', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'expensive', false, 'rejectionReasons', 'Too expensive', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'has_loan', false, 'rejectionReasons', 'Has a loan from another company', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'another_credit', false, 'rejectionReasons', 'Another credit', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'unemployed', false, 'rejectionReasons', 'Unemployed', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'client_na', false, 'rejectionReasons', 'Client NA', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'no_proof_employment', false, 'rejectionReasons', 'No proof of employment', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'expired_id', false, 'rejectionReasons', 'Expired ID', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'refuse_info', false, 'rejectionReasons', 'Refuse to provide info', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'maternity_leave', false, 'rejectionReasons', 'Maternity leave', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'bad_employer', false, 'rejectionReasons', 'Bad employer', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'unofficial_employment', false, 'rejectionReasons', 'Unofficial employment', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'short_experience', false, 'rejectionReasons', 'Short experience', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'too_young', false, 'rejectionReasons', 'Too young', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'bad_performance_of_related_person', false, 'rejectionReasons', 'Bad performance of related person', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'not_needed', false, 'withdrawReasons', 'Not needed', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'small_amount', false, 'withdrawReasons', 'Small amount', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'expensive', false, 'withdrawReasons', 'Too expensive', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'wrong_name', false, 'withdrawReasons', 'Wrong first/last name', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'wants_other_amount', false, 'withdrawReasons', 'Wants another amount/period', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'wants_other_product', false, 'withdrawReasons', 'Wants another product', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'cannot_send_da', false, 'withdrawReasons', 'Cannot send DA', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'double_submit', false, 'withdrawReasons', 'Double submit', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'expired_id', false, 'withdrawReasons', 'Expired ID', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'posta_canceled', false, 'withdrawReasons', 'Posta canceled', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'wrong_pin', false, 'withdrawReasons', 'Wrong pin', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'has_active', true, 'rejectionReasons', 'Has an active loan in our company', true);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'incaso_debt', true, 'rejectionReasons', 'Incaso debt', true);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'too_old', true, 'rejectionReasons', 'Too old', true);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'bad_perf_icm', true, 'rejectionReasons', 'Bad performance in IC', true);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'other', true, 'rejectionReasons', 'Other', true);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'salary_ratio_limit', true, 'rejectionReasons', 'Salary ratio limit', true);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'min_debt_delay_interest', true, 'rejectionReasons', 'Minimal debt for delay interest', true);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (true, 'false_data', true, 'rejectionReasons', 'False data', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (true, 'suspicious_person', true, 'rejectionReasons', 'Suspicious person', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'bad_perf', true, 'rejectionReasons', 'Bad performance', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'not_resident', false, 'rejectionReasons', 'Not resident of Kosovo', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'Merrjep_Promised_to_apply', false, 'withdrawReasons', 'Merrjep_Promised_to_apply', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'salary_ratio', false, 'rejectionReasons', 'Salary ratio limit', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'Not_Answering', false, 'withdrawReasons', 'Not_Answering', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'web_site', false, 'withdrawReasons', 'Web application', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'docs_not_visible', false, 'withdrawReasons', 'Documents not visible', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'Client_not_answering', false, 'withdrawReasons', 'Client not answering', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'pc', false, 'loan_purpose', 'PC', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'mobile_phone', false, 'loan_purpose', 'Mobile phone', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'white_good', false, 'loan_purpose', 'White good', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'tv', false, 'loan_purpose', 'TV', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'furniture', false, 'loan_purpose', 'Furniture', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'holiday_and_travel', false, 'loan_purpose', 'Holiday and Travel ', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'electrical_tools', false, 'loan_purpose', 'Electrical tools ', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'construction_materials', false, 'loan_purpose', 'Construction materials', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'jewellery', false, 'loan_purpose', 'Jewellery', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'insurance', false, 'loan_purpose', 'Insurance', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'household_needs', false, 'loan_purpose', 'Household needs', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'personal_needs', false, 'loan_purpose', 'Personal needs', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'until_paycheck', false, 'loan_purpose', 'Until paycheck', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'renovation', false, 'loan_purpose', 'Renovation', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'closing_debts', false, 'loan_purpose', 'Closing debts', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'refinance_in_other_mfi_or_bank', false, 'loan_purpose', 'Refinance in other MFI or Bank', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'wedding', false, 'loan_purpose', 'Wedding', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'health_expenses', false, 'loan_purpose', 'Health expenses', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'car_expenses', false, 'loan_purpose', 'Car expenses', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'other', false, 'loan_purpose', 'Other', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'no_fa', false, 'rejectionReasons', 'No FA', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'online_shopping', false, 'loan_purpose', 'Online shopping', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'BAD_CRK', false, 'rejectionReasons', 'Bad performance in CRK', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'Merrjep_Cash_application', false, 'withdrawReasons', 'Merrjep_Cash_application', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'Merrjep_Car_NotProven', false, 'withdrawReasons', 'Merrjep_Car_NotProven', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'Clinet_tested', false, 'withdrawReasons', 'Clinet_tested', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'MerrJep.com', false, 'mediasource', 'MerrJep.com', false);
+            INSERT INTO public.classifier (bad, key, read_only, type, value, system_only) VALUES (false, 'unproven_employment', false, 'rejectionReasons', 'Unproven employment', false);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-05:add-default-settings-taken-from-kosovo" author="argo" context="bosnia">
+        <sql>
+            INSERT INTO public.settings (id, archive_defaulted_loan_duration, archive_duration, auth_cash_user, close_defaulted_loan_duration, close_loan_agreement_duration, cons_dealer_payment_duration, contact_new_client_duration, correction_limit, create_file_duration, no_task_minutes, overdue_tasks_manager, overpayment_limit, payout_user, send_dept_collection_duration, send_dept_collection_user, send_termination_duration, destroy_loan_agreements_duration, destroy_loan_agreements_user, campaign_manager, currency_rate_duration, partner_balance_limit, partner_mail_request_duration, written_off_deys, attach_agreement_duration, collection_fee_method, currency_call_duration, currency_letter_duration, currency_perc_limit, currency_period_limit, currency_risk_enabled, currency_risk_task_duration, currency_risk_task_user, currency_sum_limit, currency_task_user, add_sms_balance_task_user, sms_balance_limit, print_loan_agreements_user, contact_internal_client_duration, closed_loans_archival_threshold_years, defaulted_loans_archival_threshold_years)
+            VALUES (1, 3360, 3360, 'testadmin', null, null, 10080, 180, 0.5, 6720, 10, 'testadmin', 2.5, 'testadmin', 480, 'testadmin', 240, 3360, 'testadmin', 'testadmin', null, 15000, null, 365, null, 'debt_date', null, null, null, null, false, null, 'shpend', null, 'shpend', 'testadmin', 50, 'testadmin', null, 3, 5);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-05:change-default-age-limit-to-70" author="argo" context="bosnia">
+        <sql>
+            UPDATE property set long_value = 70
+                where country_config_id = (select id from country_configuration where property_group = 'client' and property = 'age_limit');
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-05:add-latest-overdue-settings-from-kosovo" author="argo" context="bosnia">
+        <sql>
+            INSERT INTO public.overdue_process_settings (created, delay_days, delay_interest, internal_collection_days, last_updated, last_updated_user, max_delay_days, max_suspended_days, min_delay_debt, min_reminder_debt, min_termination_debt, suspension_fee, valid_from, delay_interest_source)
+            VALUES (now(), 4, 0.60, 60, now(), 'testadmin', 180, 17, 5.00, 5.00, 0.00, 5, now(), 'PRINCIPAL');
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-05:add-latest-overdue-actions-from-kosovo" author="argo" context="bosnia">
+        <sql>
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 0.00, null, 'First reminder call', 'call', now(), null, null, 6, 3, true, true, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 0.00, null, 'Second reminder call', 'call', now(), null, null, 16, 12, true, true, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 0.00, null, 'Third reminder call', 'call', now(), null, null, 36, 20, false, true, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 15.00, 'fix', '1st reminder letter', 'letter', now(), null, null, 10, 9, true, false, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 20.00, 'fix', '2nd reminder letter', 'letter', now(), null, null, 20, 18, false, false, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 25.00, 'fix', 'Termination alert', 'letter', now(), null, null, 30, 24, false, false, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 50.00, 'fix', 'Termination notice', 'letter', now(), null, null, 50, 30, false, false, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 0.00, null, 'Valid for debt collection', 'other', now(), null, null, 90, 36, false, false, 1, 60);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 5.00, 'fix', '5th reminder SMS', 'sms', now(), 22, null, 41, 28, false, true, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 2.00, 'fix', '1st reminder SMS', 'sms', now(), 18, null, 4, 2, true, true, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 2.00, 'fix', '2nd reminder SMS', 'sms', now(), 19, null, 14, 6, true, true, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 2.00, 'fix', '3rd reminder SMS', 'sms', now(), 20, null, 24, 15, false, true, 1, null);
+            INSERT INTO public.overdue_action (action_desc, action_fee, action_fee_unit, action_name, action_type, created, doc_template_id, doc_template_secondary_id, overdue_days, reminder_type, skip_for_suspended, soft_process_action, overdue_settings_id, alternate_delay_days)
+            VALUES ('', 2.00, 'fix', '4th reminder SMS', 'sms', now(), 21, null, 34, 21, false, true, 1, null);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-05:add-loan-product-configuration-for-fff" author="argo" context="bosnia">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 100,
+            max_principal = 600,
+            min_loan_period = 1,
+            max_loan_period = 1,
+            min_interest = 0.0,
+            max_interest = 0.0,
+            admission_fee_perc = 0.0,
+            salary_ratio_regular = 50,
+            salary_ratio_second_active = 50,
+            salary_ratio_unofficial = 50,
+            min_apr = 0.0,
+            max_apr = 0.0,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0
+            WHERE id = 100;
+
+            UPDATE loan_product_condition SET
+            loan_amount_from = 100,
+            loan_amount_to = 600
+            WHERE loan_product_id = 100 and period = 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-09:add-loan-product-configuration-for-basic" author="argo" context="bosnia">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 100,
+            max_principal = 1000,
+            min_loan_period = 1,
+            max_loan_period = 8,
+            min_interest = 0.0,
+            max_interest = 9.0,
+            admission_fee_perc = 30.61,
+            salary_ratio_regular = 50,
+            salary_ratio_second_active = 50,
+            salary_ratio_unofficial = 50,
+            min_apr = 86.50,
+            max_apr = 130.0,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0
+            WHERE id = 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-04-24:add-loan-product-configuration-for-dealer" author="risto" context="bosnia">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 100,
+            max_principal = 3000,
+            min_loan_period = 1,
+            max_loan_period = 18,
+            min_interest = 0.0,
+            max_interest = 9.0,
+            admission_fee_perc = 34.34,
+            salary_ratio_regular = 50,
+            salary_ratio_second_active = 50,
+            salary_ratio_unofficial = 50,
+            min_apr = 51,
+            max_apr = 122,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0
+            WHERE id = 2;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-05-02:add-cips-file-configuration-property" author="argo">
+        <sql>
+            INSERT INTO country_configuration (property_group, property, description) VALUES ('files', 'cips_file_required', 'Require CIPS file checking for accountant');
+            insert into property(country_config_id, type, boolean_value) values ((select max(id) from country_configuration), 'boolean', false);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-05-02:update-cips-file-configuration-property-for-bosnia" author="argo" context="bosnia">
+        <sql>
+            UPDATE property set boolean_value = true
+            where country_config_id = (select id from country_configuration where property_group = 'files' and property = 'cips_file_required');
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-05-08:require-data-verification-file-for-dealer" author="argo" context="bosnia">
+        <sql>
+            UPDATE property set boolean_value = true
+            where country_config_id = (select id from country_configuration where property_group = 'dealer' and property = 'dealer_data_verification_required');
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-05-10:update-overdue-action-doc-templates" author="argo" context="bosnia">
+        <sql>
+            update overdue_action set doc_template_id = (select id from doc_template where type = 'first_reminder_sms') where action_name = '1st reminder SMS';
+            update overdue_action set doc_template_id = (select id from doc_template where type = 'second_reminder_sms') where action_name = '2nd reminder SMS';
+            update overdue_action set doc_template_id = (select id from doc_template where type = 'third_reminder_sms') where action_name = '3rd reminder SMS';
+            update overdue_action set doc_template_id = (select id from doc_template where type = 'fourth_reminder_sms') where action_name = '4th reminder SMS';
+            update overdue_action set doc_template_id = (select id from doc_template where type = 'fifth_reminder_sms') where action_name = '5th reminder SMS';
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-05-15:add-car-loan-regular-new-owner" author="argo" context="bosnia">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 1000,
+            max_principal = 16000,
+            min_loan_period = 1,
+            max_loan_period = 60,
+            min_interest = 0.0,
+            max_interest = 9.0,
+            admission_fee_perc = 64,
+            salary_ratio_regular = 50,
+            salary_ratio_second_active = 50,
+            salary_ratio_unofficial = 50,
+            min_apr = 33.12,
+            max_apr = 136.82,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0,
+            age_min_inclusive = 21,
+            age_max_inclusive = 65
+            WHERE id = 103;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2019-05-15:add-car-pledge-product" author="argo" context="bosnia">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 1000,
+            max_principal = 16000,
+            min_loan_period = 1,
+            max_loan_period = 60,
+            min_interest = 0.0,
+            max_interest = 9.0,
+            admission_fee_perc = 68.8,
+            salary_ratio_regular = 50,
+            salary_ratio_second_active = 50,
+            salary_ratio_unofficial = 50,
+            min_apr = 34.50,
+            max_apr = 139.18,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0,
+            age_min_inclusive = 21,
+            age_max_inclusive = 65
+            WHERE id = 102;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="2019-05-15:add-car-loan-dealer-new-owner" author="argo" context="bosnia">
+        <sql>
+            UPDATE loan_products SET
+            min_principal = 1000,
+            max_principal = 16000,
+            min_loan_period = 1,
+            max_loan_period = 60,
+            min_interest = 0.0,
+            max_interest = 9.0,
+            admission_fee_perc = 64,
+            salary_ratio_regular = 50,
+            salary_ratio_second_active = 50,
+            salary_ratio_unofficial = 50,
+            min_apr = 33.12,
+            max_apr = 136.82,
+            guarantee_product = false,
+            guarantee_fee_perc = 0.0,
+            age_min_inclusive = 21,
+            age_max_inclusive = 65
+            WHERE id = 104;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
