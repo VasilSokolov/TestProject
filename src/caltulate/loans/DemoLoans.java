@@ -6,10 +6,10 @@ public class DemoLoans {
 
 	public static void main(String[] args) {
 		
-		double credit = 50000d;
+		double credit = 10000d;
 
 		double investment = 5000d;
-		double periodInMonths  = 12d;
+		double periodInMonths  = 36d;
 		double procentageOfInterest = 1;
 		double rateOfInterest = procentageOfInterest/100;
 		calculate(investment, periodInMonths, rateOfInterest);

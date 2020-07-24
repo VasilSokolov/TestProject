@@ -55,6 +55,7 @@ public class Main {
             }
 
         }
+        scan.close();
     }
 
 
@@ -76,10 +77,10 @@ public class Main {
     }
 
     private  static boolean outOfTrack(int row, int col){
-        if(row < 1 || row > raceTrack[0].length || row > 30){
+        if(1 > row || row >= 30){
             return true;
         }
-        if(col < 1 || col >raceTrack[1].length || col> 30 ){
+        if(1 > col || col >= 30 ){
             return true;
         }
         return false;
