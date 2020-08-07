@@ -27,5 +27,11 @@ public class DemoLoans {
 		return sum;
 		
 	}
+	
+//	private void mm() {
+//		for (int i = 0; i < array.length; i++) {
+//			
+//		}
+//	}
 
 }
