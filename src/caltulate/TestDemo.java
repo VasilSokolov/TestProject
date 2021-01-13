@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class TestDemo {
 
@@ -37,7 +38,28 @@ public class TestDemo {
 //		};
 //		
 //		dog1.fly("animal");
-		reversedString();
+//		reversedString();
+//		treeMap();
+		
+		List<String> list = new LinkedList<String>();
+		list.add("AAAA");
+		list.add("ssss");
+		list.add("sdsdsd");
+		list.add("qweqwe");
+		list.add(2, "eeeeee00");
+		System.out.println(list);
+		
+	}
+	
+	
+	private static void treeMap() {
+		Map person = new TreeMap<Cat, Integer>();
+		person.put(new Cat("yellow", 6), 4);
+		person.put(new Cat("brown", 11), 6);
+		person.put(new Cat("black", 8), 9);
+		person.put(new Cat("red", 17), 2);
+		
+		System.out.println(person.get(1));
 	}
 	
 	public static void ts() {
