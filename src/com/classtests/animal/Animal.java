@@ -9,7 +9,6 @@ public class Animal implements IRun {
 
 	@Override
 	public void walk() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Animal Walk");
 	}
 }
