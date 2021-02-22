@@ -1,37 +1,21 @@
 package com.magicMap;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 /*
- * To use this class its need 5 dependencies:
-compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
-//compile group: 'org.jetbrains', name: 'annotations', version: '16.0.1'
-compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.10.1'
-compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
+ * To use this class its need dependency:
+	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
  */
 public final class DataMap implements Serializable {
 
@@ -40,41 +24,123 @@ public final class DataMap implements Serializable {
 	private static DataMap instance = new DataMap();
 
 	private transient static Map<String, Object> data;
-	
+
 	private String res;
 
 	public DataMap() {
 		data = new HashMap<>();
 	}
 
-	public DataMap(Object object) {
-		this(new Gson().toJson(object));
-	}
-
-	public DataMap(String jsonData) {
+	public DataMap(Object obj) {
 		this();
-		if (jsonData != null) {
-			Type collectionType = new TypeToken<Map<String, Object>>() {
-			}.getType();
-			if (validJson(jsonData)) {
-
-				res = jsonData;
+//		String jsonData = "";
+		if (obj != null) {
+			if (obj instanceof String || obj instanceof Number) {
+				data = Collections.singletonMap("str", obj);
 			} else {
-				data = new Gson().fromJson(jsonData, collectionType);
-				
+				try {
+//					jsonData = new ObjectMapper().writeValueAsString(obj);
+					data = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(obj), Map.class);
+				} catch (IOException ex) {
+					System.out.println(ex.getMessage());
+				}
 			}
-			
 		} else {
 //          Logger.log("Creating new DataMap with a 'null' JSON data string."
 		}
 	}
 
-	public boolean validJson(String jsonData) {
-		Object s = new Gson().fromJson(jsonData, Object.class).getClass();
-		if (s.equals(String.class)) {
-			return true;
+	public DataMap(Map object) {
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
+		try {
+
+			String result = mapper.writeValueAsString(object);
+			// convert JSON string to Map
+			data = mapper.readValue(result, new TypeReference<Map<String, Object>>() {
+			});
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
-		return false;
+	}
+
+	public DataMap convertMapToDataMap(Map object) {
+		try {
+			// convert JSON string to Map
+			data = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(object), Map.class);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return new DataMap(data);
+	}
+
+	public <T> T dtoToObject(Class<T> toValueType) {
+		ObjectMapper objMapper = new ObjectMapper();
+		T obj = null;
+		Object o = null;
+		try {
+			objMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+			objMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			objMapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
+			objMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+			objMapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, true);
+			objMapper.registerModule(new JavaTimeModule());
+			String jsonObject = new ObjectMapper().writeValueAsString(data);
+			o = new ObjectMapper().readValue(jsonObject, Object.class);
+			obj =  objMapper.convertValue(o,toValueType);
+		} catch (IllegalArgumentException | IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return obj;
+	}
+	
+	public static <T> T dataToEntityOrDto(Object object, Class<T> toValueType) {
+		ObjectMapper objMapper = new ObjectMapper();
+		T obj = null;
+		Object o = null;
+		try {
+			objMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+			objMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			objMapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
+			objMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+			objMapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, true);
+			objMapper.registerModule(new JavaTimeModule());
+			String jsonObject = new ObjectMapper().writeValueAsString(object);
+			o = new ObjectMapper().readValue(jsonObject, Object.class);
+			obj =  objMapper.convertValue(o,toValueType);
+		} catch (IllegalArgumentException | IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return obj;
+	}
+
+	public <C> C softConvertValue(Class<C> clazz) {
+		C obj = null;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
+			mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+			Object o = Class.forName(String.format("%s.%s", clazz.getPackageName(), clazz.getSimpleName()))
+					.newInstance();
+			obj = (C) mapper.readValue(new ObjectMapper().writeValueAsString(data), o.getClass());
+		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return obj;
+	}
+
+	public <D> D put(String key, Object object) {
+		return (D) data.put(key, object);
+	}
+
+	public <V> V remove(String key) {
+		return (V) data.remove(key);
 	}
 
 	public static DataMap of(Object... keyValuePairs) {
@@ -89,73 +155,21 @@ public final class DataMap implements Serializable {
 		return instance;
 	}
 
-	@Override
-	public String toString() {
-		String result;
-
+	public <T> T get(String key) {
 		try {
-			
-				result = new Gson().toJson(data);
-			
-		} catch (StackOverflowError e) {
-			result = String.valueOf(data);
-		}
-		return result;
-	}
-
-	public DataMap getData(String key) {
-
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			String result = mapper.writeValueAsString(data.get(key));
-			if (validJson(result)) {
-				return new DataMap(result);
+			if (data.get(key) instanceof String || data.get(key) instanceof Number) {
+				return (T) data.get(key);
+			} else {
+				data = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(data.get(key)),
+						new TypeReference<Map<String, Object>>() {
+						});
 			}
-			return new DataMap(result);
-		} catch (JsonProcessingException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new DataMap();
-	}
-	
-	public Map get(String key) {
-		return (Map) data.get(key);
-	}
-
-
-	public DataMap(Map object) {
-
-//		String result = new Gson().toJson(object);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
-		try {
-
-			String result = mapper.writeValueAsString(object);
-			// convert JSON string to Map
-			data = mapper.readValue(result, new TypeReference<Map<String, Object>>() {});
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	public DataMap convertMapToDataMap(Map object) {
-		
-		String result = new Gson().toJson(object);
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			// convert JSON string to Map
-			data = mapper.readValue(result, Map.class);
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		return new DataMap(data);
-	}
-
-	public <V> V remove(String key) {
-		return (V) data.remove(key);
+//		return (T) data.get(key);
+		return (T) data;
 	}
 
 	@Override
@@ -182,6 +196,15 @@ public final class DataMap implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		String result;
+		try {
+			result = new ObjectMapper().writeValueAsString(data);
+		} catch (StackOverflowError | JsonProcessingException e) {
+			result = String.valueOf(data);
+		}
+		return result;
+	}
 }
