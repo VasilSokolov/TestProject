@@ -117,24 +117,7 @@ public final class DataMap implements Serializable {
 		return obj;
 	}
 
-	public <C> C softConvertValue(Class<C> clazz) {
-		C obj = null;
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			mapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
-			mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-			Object o = Class.forName(String.format("%s.%s", clazz.getPackageName(), clazz.getSimpleName()))
-					.newInstance();
-			obj = (C) mapper.readValue(new ObjectMapper().writeValueAsString(data), o.getClass());
-		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			System.out.println(e.getMessage());
-		}
-
-		return obj;
-	}
-
+	
 	public <D> D put(String key, Object object) {
 		return (D) data.put(key, object);
 	}

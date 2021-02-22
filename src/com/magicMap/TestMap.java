@@ -39,18 +39,18 @@ public class TestMap {
 		System.out.println(mapp);
 		DataMap dataMap = new DataMap(map);
 
-		DataMap a3 = dataMap.getData("a3");
-		DataMap adres = a3.getData("adres");
-		String city = adres.getData("city").toString();
+//		DataMap a3 = dataMap.getData("a3");
+//		DataMap adres = a3.getData("adres");
+//		String city = adres.getData("city").toString();
 //		String town = adres.getData("town").toString();
 		
 		
 //		Map a3 =   dataMap.get("a3");
 //		Map adres =   (Map) a3.get("adres");
 //		String city =(String) adres.get("city");
-		System.out.println(a3);
-		System.out.println(adres);
-		System.out.println(city);
+//		System.out.println(a3);
+//		System.out.println(adres);
+//		System.out.println(city);
 //		System.out.println(town);
 	}
 
