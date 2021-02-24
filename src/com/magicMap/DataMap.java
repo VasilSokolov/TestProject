@@ -5,6 +5,10 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -20,7 +24,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public final class DataMap implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private static Logger logger = LoggerFactory.getLogger(DataMap.class);
 	private static DataMap instance = new DataMap();
 
 	private transient static Map<String, Object> data;
@@ -157,27 +162,17 @@ public final class DataMap implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((res == null) ? 0 : res.hashCode());
-		return result;
+		return Objects.hash(res);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		DataMap other = (DataMap) obj;
-		if (res == null) {
-			if (other.res != null)
-				return false;
-		} else if (!res.equals(other.res))
-			return false;
-		return true;
+		return Objects.equals(this.res, other.res);
 	}
 
 	@Override
@@ -188,6 +183,7 @@ public final class DataMap implements Serializable {
 		} catch (StackOverflowError | JsonProcessingException e) {
 			result = String.valueOf(data);
 		}
+		
 		return result;
 	}
 }
