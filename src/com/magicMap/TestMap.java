@@ -34,10 +34,10 @@ public class TestMap {
 		List list = new ArrayList<>();
 		list.add("aaa");
 		list.add("bbb");
-		DataMap mapp = DataMap.of("str", "5", "pesho", m, "list", list);
-		
-		System.out.println(mapp);
-		DataMap dataMap = new DataMap(map);
+//		DataMap mapp = DataMap.of("str", "5", "pesho", m, "list", list);
+//		
+//		System.out.println(mapp);
+//		DataMap dataMap = new DataMap(map);
 
 //		DataMap a3 = dataMap.getData("a3");
 //		DataMap adres = a3.getData("adres");
