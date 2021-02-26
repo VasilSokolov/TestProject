@@ -51,7 +51,7 @@ public final class DataMap implements Serializable {
 				}
 			}
 		} else {
-//          Logger.log("Creating new DataMap with a 'null' JSON data string."
+			logger.info("Creating new DataMap with a 'null' JSON data string.");
 		}
 	}
 
