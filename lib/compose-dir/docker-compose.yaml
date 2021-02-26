@@ -1,94 +1,28 @@
-version: '3.3'
+version: "3.3"
 services:
-  ###########################################################
-  ###################     DATABASE    #######################
-  ###########################################################
-  
-   al-crm-db:
-     image: "registry.iute.eu/db-test/db-albania:0.9.9"
-     container_name: al-crm-db
-     volumes:
-     - iute-al-db-data:/var/lib/postgresql/data    
-     environment:
-       POSTGRES_PASSWORD: postgres
-       POSTGRES_DB: iute               
-     ports:
-     - 15432:5432
-     
-#  md-crm-db:
-#    image: "postgres:11"
-   # image: "registry.iute.eu/db-test/db-moldova:0.9.9"
-#    container_name: md-crm-db
-#    volumes:
-#    - iute-md-db-data:/var/lib/postgresql/data   
-#    environment:
-#      POSTGRES_PASSWORD: postgres
-#      POSTGRES_DB: iute      
-#    ports:
-#    - 25432:5432
-    
-#   mk-crm-db:   
-#     image: "postgres:11"
-#     #image: "registry.iute.eu/db-test/db-macedonia:0.9.9"
-#     container_name: mk-crm-db
-#     volumes:
-#     - iute-mk-db-data:/var/lib/postgresql/data    
-#     environment:
-#       POSTGRES_PASSWORD: postgres
-#       POSTGRES_DB: iute               
-#     ports:
-#     - 35432:5432
-     
-   ks-crm-db:   
-     image: "postgres:11"
-    # image: "registry.iute.eu/db-test/db-macedonia:0.9.9"
-     container_name: ks-crm-db
-     volumes:
-     - iute-ks-db-data:/var/lib/postgresql/data    
-     environment:
-       POSTGRES_PASSWORD: postgres
-       POSTGRES_DB: iute               
-     ports:
-     - 65432:5432
-     
-#   bs-crm-db:
-#     image: "registry.iute.eu/db-test/db-bosnia:0.9.9"
-#     container_name: bs-crm-db
-#     volumes:
-#     - iute-mk-db-data:/var/lib/postgresql/data    
-#     environment:
-#       POSTGRES_PASSWORD: postgres
-#       POSTGRES_DB: iute               
-#     ports:
-#     - 45432:5432
-
-#   bg-crm-db:
-   #  image: "postgres:11"
-#     image: "registry.iute.eu/db-test/db-bulgaria:0.9.9"
-#     container_name: bg-crm-db
-#     volumes:
-#     - iute-bg-db-data:/var/lib/postgresql/data    
-#     environment:
-#       POSTGRES_PASSWORD: postgres
-#       POSTGRES_DB: iute               
-#     ports:
-#     - 55432:5432
-  ###########################################################
-  ###################     APPLICATION    #######################
-  ###########################################################
-  
- #    image: "postgres:11"
-  #md-crm-app:
-   # image: "registry.iute.eu/les/les-app:2.88.0"
-    #container_name: md-crm-app   
-    #ports:
-    #- 8081:8080
-    #volumes:
-    #  -  /app/git/iute-crm/build/libs/iute-crm.war:/usr/local/tomcat/webapps/iute-crm.war       
+    mongodb:
+        image : "bitnami/mongodb:latest"
+        container_name: mongodb
+        environment:
+          MONGO_USERNAME: mongo
+          MONGO_PASSWORD: mongo
+          MONGO_DB: BookStore
+        volumes:
+        - mongodb-database:/data/db
+        ports:
+        - 37017:27017
+        restart: unless-stopped
+        
+    bg-crm-db:
+        image: "postgres:11"
+        container_name: postgres-db
+        volumes:
+        - postgres-data:/var/lib/postgresql/data    
+        environment:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test               
+        ports:
+        - 55432:5432
 volumes:
-  iute-al-db-data:
-#  iute-md-db-data:
-#  iute-mk-db-data:
-#  iute-bg-db-data:
-#  iute-bs-db-data:
-  iute-ks-db-data:
+    mongodb-database:
+    postgres-data:
