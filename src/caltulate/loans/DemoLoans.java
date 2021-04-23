@@ -10,8 +10,8 @@ public class DemoLoans {
 
 		double investment = 5000d;
 		double periodInMonths  = 12d;
-		double procentageOfInterest = 1;
-		double rateOfInterest = procentageOfInterest/100;
+		double percentageOfInterest = 1;
+		double rateOfInterest = percentageOfInterest/100;
 		calculate(investment, periodInMonths, rateOfInterest);
 	}
 	
