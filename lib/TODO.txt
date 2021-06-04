@@ -1,6 +1,6 @@
-const dev = "http://localhost:8081";
+const URL = pm.environment.get("dev_erp") + '/user/authenticate';
 const auth = {
-  url: dev+"/user/authenticate",
+  url: URL,
   method: "post",
   body: {
      mode: 'raw',
@@ -10,9 +10,6 @@ const auth = {
       'Content-Type': 'application/json'
   }
 };
-
-    console.log(auth)
 pm.sendRequest(auth, function (err, response) {
-    console.log(response.json())
   pm.environment.set("token", response.json().token);
 });
