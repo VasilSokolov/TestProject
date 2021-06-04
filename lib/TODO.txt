@@ -1,3 +1,4 @@
+//Environment var dev_erp, password, userName
 const URL = pm.environment.get("dev_erp") + '/user/authenticate';
 const auth = {
   url: URL,
