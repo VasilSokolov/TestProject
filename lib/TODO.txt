@@ -1,0 +1,18 @@
+const dev = "http://localhost:8081";
+const auth = {
+  url: dev+"/user/authenticate",
+  method: "post",
+  body: {
+     mode: 'raw',
+     raw: JSON.stringify({'password': '1234', 'userName': 'pepsa@ad.bg'})
+  },
+  header: {
+      'Content-Type': 'application/json'
+  }
+};
+
+    console.log(auth)
+pm.sendRequest(auth, function (err, response) {
+    console.log(response.json())
+  pm.environment.set("token", response.json().token);
+});
