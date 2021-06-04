@@ -4,7 +4,7 @@ const auth = {
   method: "post",
   body: {
      mode: 'raw',
-     raw: JSON.stringify({'password': '1234', 'userName': 'pepsa@ad.bg'})
+     raw: JSON.stringify({'password': pm.environment.get("password"), 'userName': pm.environment.get("userName")})
   },
   header: {
       'Content-Type': 'application/json'
