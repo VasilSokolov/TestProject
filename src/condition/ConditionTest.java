@@ -7,6 +7,21 @@ public class ConditionTest {
 
 	public static void main(String[] args) {
 
+		GearPartner partner = new GearPartner();
+//		partner.setReportTypes(ReportTypes.getDefaultReportTypes());
+		if (isReportTypesExist(partner)) {
+			System.out.println("Exist: " + partner.toString());
+		} else {
+			System.out.println("Not Exist: " + partner.toString());
+		}
+
+	}
+	
+	private static boolean isReportTypesExist(GearPartner partner){
+        return partner.getReportTypes() != null && (partner.getReportTypes().size()>0);
+    }
+	
+	private void testCondotions() {
 		byte a = 127; 
 		byte b = 127; 
 //		b = a + b; // error : cannot convert from int to byte 
