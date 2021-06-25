@@ -30,12 +30,12 @@ public class StreamsDemo {
 //		demo.items();
 //		List<Users> addData = demo.addData();
 //		System.out.println(addData.toString());
-//		boolean isPassed = demo.passedCheck();
+		boolean isPassed = demo.passedCheck();
 //		System.out.println("Sign: " + isPassed);
-		logger.info("Result");
+//		logger.info("Result");
 //		log.error("CxmService call sendClientProfile method : "); 
 //		demo.addDataInList();
-		demo.countFee();
+//		demo.countFee();
 	}
 
 	private List<String> items() {
@@ -162,10 +162,17 @@ public class StreamsDemo {
 	public boolean passedCheck() {
 		LoanApplicationService loanAppService = new LoanApplicationService();
 
-		List<LoanApplication> allActiveLoans = Collections.emptyList();
-		List<LoanApplication> activeLoans = Collections.emptyList();
+//		List<LoanApplication> allActiveLoans = Collections.emptyList();
+		List<LoanApplication> allActiveLoans;
+		List<LoanApplication> activeLoans;
+		List<LoanApplication> accountMailDTOS;
+		
+		
+		List<String> bankAccounts = loanAppService.getAllClients().stream().filter(c -> c.isActive() && c.isAgreementSigned()).map(c->c.getClientPin()).collect(Collectors.toList());
+		List<String> emails = loanAppService.getIncEmails().stream().map(email-> email.getIncludedEmails()).flatMap(group -> group.stream()).collect(Collectors.toList());  
 
-		allActiveLoans = loanAppService.findActiveByClientPin().stream().filter(a -> a.isActive())
+		logger.info(emails.toString());
+		allActiveLoans = loanAppService.getAllClients().stream().filter(a -> a.isActive())
 				.collect(Collectors.toList());
 
 		activeLoans = allActiveLoans.stream().filter(a -> a.isAgreementSigned()).collect(Collectors.toList());
@@ -174,9 +181,22 @@ public class StreamsDemo {
 			return true;
 		}
 
-		boolean isPassedChack = activeLoans.size() <= 2;
+		Boolean isPassedChack = activeLoans.size() <= 2;
+
+		logger.info(isPassedChack.toString());
 		return isPassedChack;
 	}
+	//TODO Example of nested loops
+//	matrix3.stream().filter(row -> !row.isEmpty()).flatMap(row -> row.stream())
+//    .filter(col -> !col.isEmpty())
+//    .flatMap(col -> col.stream())
+//    .filter(cell -> !cell.isEmpty())
+//    .flatMap(cell -> cell.stream())
+//    .filter(element -> !element.isEmpty())
+//    .map(element -> element.substring(0, 1))
+//    .forEach(element -> {
+//        System.out.print(element);
+//    });
 
 	public void addDataInList() {
 		Collection<Person> originalPeople = new HashSet<>();

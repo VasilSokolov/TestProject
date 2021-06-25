@@ -2,7 +2,9 @@ package lambda.model;
 
 import java.beans.Transient;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class LoanApplication {
 
@@ -168,6 +170,8 @@ public class LoanApplication {
 	    private String signedPerson;
 
 	    private String signedOffice;
+	    
+	    private List<String> includedEmails = new ArrayList<String>();
 
 		public LoanApplication(Integer id, String clientPin, Date signed, Integer refNr, boolean agreementSigned, boolean active) {
 			super();
@@ -179,6 +183,12 @@ public class LoanApplication {
 			this.active = active;
 			
 		}
+		
+
+		public LoanApplication(List<String> includedEmails) {
+			this.includedEmails = includedEmails;
+		}
+
 
 		public Integer getId() {
 			return id;
@@ -826,6 +836,14 @@ public class LoanApplication {
 
 		public void setSignedOffice(String signedOffice) {
 			this.signedOffice = signedOffice;
+		}
+
+		public List<String> getIncludedEmails() {
+			return includedEmails;
+		}
+
+		public void setIncludedEmails(List<String> includedEmails) {
+			this.includedEmails = includedEmails;
 		}
 		
 		
