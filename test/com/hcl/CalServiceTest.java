@@ -8,11 +8,11 @@ import static org.mockito.Mockito.*;
 import junit.framework.Assert;
 
 public class CalServiceTest {
-	
-	public void String k;
+
+	public String k;
 	public String w;
 	public int rs;
-	
+
 	CalService calService;
 	@Before
 	public void setup(){
@@ -21,12 +21,12 @@ public class CalServiceTest {
 		calService = new CalService();
 		calService.setCalculator(cal);
 	}
-	
+
 	@Test
 	public void testAddTwoNumbers(){
 		Assert.assertEquals(6, calService.addTwoNumbers(3, 3));
 	}
-	
+
 //	@Test
 //	public void text
 }
